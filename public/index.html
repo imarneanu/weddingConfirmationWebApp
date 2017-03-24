@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Alex&Iulia</title>
+    <style media="screen">
+		#wrapper {
+			width: 100%;
+			text-align: center;
+	    }
+    </style>
+    <script src="//js.pusher.com/4.0/pusher.min.js"></script>
+  </head>
+
+  <body>
+  	<div id="wrapper">
+  		<img src="litoral.jpg" width="50%" height="50%" />
+  	</div> 
+  </body>
+
+  <script>
+    window.onload = function() {
+	  	var guest = getQueryVariable("guest");
+	  	var content;
+	  	switch(guest) {
+		  case "alex.cretu":
+		    break;
+		  case "markus.gemma":
+		  case "katja.kramberger":
+		  case "amaris.castanon":
+		  case "anton.olga":
+		  case "franz.valeria":
+		  case "niccolo.constantini":
+		    content = "content_en.html";
+		    break;
+		  case "dragica.ivan":
+		    content = "content_de.html";
+		    break;
+		  default:
+		    content = "content_ro.html";
+	  	}
+	  	if (content != null) {
+		  	window.location = "https://iuliaalexwedding.firebaseapp.com/" + content + "?guest=" + guest;
+	  	}
+	};
+	
+	function getQueryVariable(variable) {
+	  var query = window.location.search.substring(1);
+	  var vars = query.split("&");
+	  for (var i=0;i<vars.length;i++) {
+	    var pair = vars[i].split("=");
+	    if (pair[0] == variable) {
+	      return pair[1];
+	    }
+	  }
+	}
+  </script>
+    
+</html>

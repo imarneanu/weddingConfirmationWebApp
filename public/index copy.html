@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome to Firebase Hosting</title>
+    <style media="screen">
+      body {
+        font-family: Roboto, Arial, sans-serif;
+        background: #ECEFF1;
+        color: rgba(0,0,0,0.87);
+      }
+
+      a {
+        color: rgb(3,155,229);
+      }
+
+      #message {
+        max-width: 400px;
+        margin: 40px auto;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
+        border-radius: 2px;
+        background: white;
+        padding: 16px 24px;
+	    position: fixed;
+	    top: 50%;
+	    left: 50%;
+	    /* bring your own prefixes */
+     	transform: translate(-50%, -50%);
+      }
+
+      #message h1 {
+        font-size: 22px;
+        font-weight: 500;
+        text-align: center;
+        margin: 0 0 16px;
+      }
+
+      #message p {
+        font-weight: 300;
+        line-height: 150%;
+      }
+
+      #message ul {
+        list-style: none;
+        margin: 16px 0 0;
+        padding: 0;
+        text-align: center;
+      }
+
+      #message li a {
+        display: inline-block;
+        padding: 8px;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-weight: 500;
+        background: rgb(3,155,229);
+        color: white;
+        border: 1px solid rgb(3,155,229);
+        border-radius: 3px;
+        font-size: 14px;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+      }
+    </style>
+    <script type="text/javascript" src="jquery-3.1.1.slim.min.js"></script>
+    <script type="text/javascript" src="jquery.countdown.min.js"></script>
+  </head>
+  <body>
+    <div id="message">
+      <h1 id="demo">Welcome to Firebase Hosting</h1>    
+    </div>
+    <script type="text/javascript">
+
+/*
+	$(document).ready(function(){
+	 $("#message")
+	  .countdown("2017/04/29 14:00:00", function(event) {
+	    $(this).text(
+	      event.strftime('%D days %H:%M:%S')
+	    );
+	  });
+
+	});
+*/
+	
+	</script>
+    <div id="getting-started"></div>
+  </body>
+  <script>
+	
+    window.onload = function(){
+	  var guest = getQueryVariable("guest");
+	  switch(guest) {
+		  case "alex.cretu":
+		    document.getElementById('demo').innerHTML = "Ghici cine te iubeste acum! :p" ;
+		    break;
+		  case "bogdan.oanes":
+		    document.getElementById('demo').innerHTML = "Neata Bodgan :D" ;
+		    break;
+		  default:
+		    document.getElementById('demo').innerHTML = "Neata " + guest + " :)" ;
+	  }
+	  	};
+	
+	 function getQueryVariable(variable) {
+	  var query = window.location.search.substring(1);
+	  var vars = query.split("&");
+	  for (var i=0;i<vars.length;i++) {
+	    var pair = vars[i].split("=");
+	    if (pair[0] == variable) {
+	      return pair[1];
+	    }
+	  } 
+	  alert('Query Variable ' + variable + ' not found');
+	}
+  </script>
+</html>

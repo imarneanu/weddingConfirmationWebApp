@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Alex&Iulia 29 aprilie</title>
+    <style media="screen">
+      body {
+        font-family: Roboto, Arial, sans-serif;
+        background: #ECEFF1;
+        color: rgba(0,0,0,0.87);
+      }
+
+      #getting-started {
+        max-width: 400px;
+        margin: 40px auto;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
+        border-radius: 2px;
+        background: white;
+        padding: 16px 24px;
+        text-align: center;
+        
+        position: fixed;
+	    top: 50%;
+	    left: 50%;
+     	transform: translate(-50%, -50%);
+      }
+      
+      #getting-started h2 {
+        color: #000f55;
+        text-align: center;
+      }
+      
+      #getting-started h3 {
+        color: #000f55;
+        text-align: center;
+      }
+      
+      #getting-started p {
+        font-size: 40px;
+        color: #000f55;
+        font-weight: 300;
+        line-height: 150%;
+        text-align: center;
+      } 
+      
+      #message h1 {
+	    margin-top: 100px;
+        font-size: 22px;
+        font-weight: 500;
+        text-align: center;
+        margin: 0 0 16px;
+      }
+      
+      #returnMessage h4 {
+	    text-align: center;
+      }
+            
+    </style>
+    <script type="text/javascript" src="jquery-3.1.1.slim.min.js"></script>
+    <script type="text/javascript" src="jquery.countdown.min.js"></script>
+  </head>
+
+  <body>
+    <div id="message">
+      <h1 id="welcome_message"></h1>    
+    </div>
+    <div id="returnMessage">
+      <h4>Vă rugăm reveniți in 29 martie.</h4>    
+    </div>
+    <div id="getting-started">
+      <h2>Iulia și Alex</h2>
+  	  <h3>29 aprilie 2017</h3>
+      <p id="time-left"></p>
+    </div>
+  </body>
+
+  <script>
+    window.onload = function() {
+	  	var guest = getQueryVariable("guest");
+	  	var welcome = "Neața, ";
+	  	switch (guest) {
+	  	  // Barca
+		  case "costi.aliona":
+		  	welcome +=  "Costi și Aliona!  :)";
+		  	break;
+		  case "dan.stoica":
+		  	welcome +=  "Dan și Dariana!  :)";
+		  	break;
+	  	  // set 1
+		  case "adi.ispas":
+		  	welcome +=  "Adi!  :)";
+		  	break;
+		  case "corsau.rares":
+		  	welcome +=  "Rareș!  :)";
+		  	break;
+		  case "ioana.spiri":
+		  	welcome +=  "Ioana și Spiri!  :)";
+		  	break;
+		  case "magda.claudiu":
+		  	welcome +=  "Magda și Claudiu!  :)";
+		  	break;
+		  case "rares.teodorescu":
+		  	welcome +=  "Rareș și Andreea!  :)";
+		  	break;
+		  // set 2
+		  case "costi.nistor":
+		  	welcome =  "Bună, Costi!  :)";
+		  	break;
+		  case "dan.otilia":
+		  	welcome +=  "Dan și Otilia!  :)";
+		  	break;
+		  case "mari":
+		  	welcome +=  "Mari!  :)";
+		  	break;
+		  case "nicolae.svetlana":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  // Berlin
+		  case "adina.portaru":
+		  	welcome +=  "Adina și Marius!  :)";
+		  	break;
+		  case "vali":
+		  	welcome +=  "Vali!  :)";
+		  	break;
+		  // set 1
+		  case "adela.toderici":
+		  	welcome +=  "Adela!  :)";
+		  	break;
+		  case "banut":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "calin.purcel":
+		  	welcome +=  "Călin!  :)";
+		  	break;
+		  case "cici":
+		  	welcome +=  "Cici!  :)";
+		  	break;
+		  case "claudia.harangus":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "emil.marneanu":
+		  	welcome +=  "Emil și Gheonghi!  :)";
+		  	break;
+		  case "ervin.sarkozi":
+		  	welcome +=  "Sarkozi!  :)";
+		  	break;
+		  case "fam.mone":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "gabi.imre":
+		  	welcome +=  "Gabi!  :)";
+		  	break;
+		  case "horia.muste":
+		  	welcome +=  "Horia!  :)";
+		  	break;
+		  case "marius.mailat":
+		  	welcome +=  "Marius și Cristina!  :)";
+		  	break;
+		  case "mihai.milian":
+		  	welcome +=  "Mihai și Dorina!  :)";
+		  	break;
+		  case "muresan.francisc":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "olt.dan":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "romeo.teo":
+		  	welcome +=  "Romi și Teo!  :)";
+		  	break;
+		  // set 2
+		  case "adela":
+		  	welcome +=  "Adela!  :)";
+		  	break;
+		  case "fam.soare":
+		  	welcome +=  "Simona și Cătălin!  :)";
+		  	break;
+		  case "hadarean.dan":
+		  	welcome +=  "Dan!  :)";
+		  	break;
+		  case "stefan":
+		  	welcome +=  "Ștefan!  :)";
+		  	break;
+		  // set 3
+		  case "anemona":
+		  	welcome +=  "Anemona!  :)";
+		  	break;
+		  // Bukovel
+		  case "andrei.valcea":
+		  	welcome +=  "Andrei!  :)";
+		  	break;
+		  case "aurica.eugen":
+		  	welcome +=  "Aurica și Eugen!  :)";
+		  	break;
+		  case "paul.adina":
+		  	welcome +=  "Paul, Adina și Matei!  :)";
+		  	break;
+		  // set 1
+		  case "adina.mandrut":
+		  	welcome +=  "Adina!  :)";
+		  	break;
+		  case "balan.gabriela":
+		  	welcome +=  "doamna dirigintă!  :)";
+		  	break;
+		  case "bruma":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "calin.marneanu":
+		  	welcome +=  "Călin!  :)";
+		  	break;
+		  case "cosma.gusti":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "dani.hodrea":
+		  	welcome +=  "Dani!  :)";
+		  	break;
+		  case "ionut.branzei":
+		  	welcome +=  "Ionuț!  :)";
+		  	break;
+		  case "iza.birs":
+		  	welcome +=  "Iza!  :)";
+		  	break;
+		  case "madalin.milian":
+		  	welcome +=  "Mădă!  :)";
+		  	break;
+		  // set 2
+		  case "chifa.mihai":
+		  	welcome +=  "Chifa!  :)";
+		  	break;
+		  case "fam.apostol":
+		  	welcome +=  "Ion și Cristina!  :)";
+		  	break;
+		  case "natalia.oleg":
+		  	welcome +=  "Natalia!  :)";
+		  	break;
+		  // Cadiz
+		  case "bianca.dorel":
+		  	welcome +=  "Bianca și Dorel!  :)";
+		  	break;
+		  case "dumitru.stoica":
+		  	welcome +=  "nașu'!  :)";
+		  	break;
+		  // set 1
+		  case "catalin.marneanu":
+		  	welcome +=  "Cătă!  :)";
+		  	break;
+		  case "catalin.vadan":
+		  	welcome +=  "Cătă!  :)";
+		  	break;
+		  case "cristi.man":
+		  	welcome +=  "Cristi, Lucia și Andrei!  :)";
+		  	break;
+		  case "fam.frigioiu":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "georgiana.fantaneanu":
+		  	welcome +=  "Georgi, Narcis, Maria și Ana!  :)";
+		  	break;
+		  case "pascaru":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "sabau.andrei":
+		  	welcome +=  "Andrei!  :)";
+		  	break;
+		  case "silviu.sorel":
+		  	welcome +=  "Silviu!  :)";
+		  	break;
+		  // set 2
+		  case "catalin.jurjiu":
+		  	welcome +=  "Cătă!  :)";
+		  	break;
+		  case "cipri":
+		  	welcome +=  "Cipri!  :)";
+		  	break;
+		  case "monica.tomus":
+		  	welcome +=  "Moni!  :)";
+		  	break;
+		  case "nicolae.valentina":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "stefan.raciu":
+		  	welcome +=  "Ștefan!  :)";
+		  	break;
+		  // Litoral
+		  case "bogdan.trastes":
+		  	welcome +=  "Bogdan!  :)";
+		  	break;
+		  case "carmen.gabi":
+		  	welcome +=  "Carmen și Gabi!  :)";
+		  	break;
+		  case "zoe.romi":
+		  	welcome +=  "Zoe, Romi și Emi!  :)";
+		  	break;
+		  // set 1
+		  case "angela.mari":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "bobolicu":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "cristoltean":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "ioana.maris":
+		  	welcome +=  "Ioana și Aliona!  :)";
+		  	break;
+		  case "laura.bogdan":
+		  	welcome +=  "Laura și Bogdan!  :)";
+		  	break;
+		  case "magdalena.stan":
+		  	welcome +=  "Magda!  :)";
+		  	break;
+		  case "marius.maricean":
+		  	welcome +=  "Marius!  :)";
+		  	break;
+		  case "mioara.negoita":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "nenea.berkes":
+		  	welcome +=  "Costi și Aliona!  :)";
+		  	break;
+		  case "oana.bianca":
+		  	welcome +=  "Oana Bianca!  :)";
+		  	break;
+		  case "ovidiu.oros":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "sabin.stoica":
+		  	welcome +=  "Sabin!  :)";
+		  	break;
+		  case "trisca.tudor":
+		  	welcome +=  "Trișcă!  :)";
+		  	break;
+		  case "uifalean.laura":
+		  	welcome +=  "Laura și Marius!  :)";
+		  	break;
+		  case "vadan.sabina":
+		  	welcome +=  "Nelu și Sabina!  :)";
+		  	break;
+		  case "vasile.todea":
+		  	welcome +=  "Vasile!  :)";
+		  	break;
+		  // set 2
+		  case "alex.graur":
+		  	welcome +=  "Alex!  :)";
+		  	break;
+		  case "alexandru.gama":
+		  	welcome =  "Bună, Alexandru!  :)";
+		  	break;
+		  case "boga.mihai":
+		  	welcome +=  "Boga!  :)";
+		  	break;
+		  case "lucian.livia":
+		  	welcome +=  "Lucian și Livia!  :)";
+		  	break;
+		  case "mama.tata":
+		  	welcome +=  "mama și tata!  :)";
+		  	break;
+		  // set 3
+		  case "darian.onaciu":
+		  	welcome +=  "Darian!  :)";
+		  	break;
+		  case "mircea.ponorean":
+		  	welcome +=  "Mircea!  :)";
+		  	break;
+		  // Litoral2
+		  case "ileana.ion":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "tavi.corina":
+		  	welcome +=  "Tavi și Corina!  :)";
+		  	break;
+		  // set 1
+		  case "alex.melania":
+		  	welcome +=  "Alex și Mela!  :)";
+		  	break;
+		  case "costel":
+		  	welcome +=  "Costel!  :)";
+		  	break;
+		  case "gabi.oros":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "gavrilutiu":
+		  	welcome =  "Doamna învățătoare!";
+		  	break;
+		  case "hosu.vlad":
+		  	welcome +=  "Vlad!  :)";
+		  	break;
+		  case "ionica.varga":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "irimia.emilia":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "nasa.mia":
+		  	welcome +=  "nașa Mia și Teodora!  :)";
+		  	break;
+		  case "raul.bodea":
+		  	welcome +=  "Raul și Diana!  :)";
+		  	break;
+		  case "sebi.boga":
+		  	welcome +=  "Boga!  :)";
+		  	break;
+		  case "tusa.moni":
+		  	welcome +=  "Moni!  :)";
+		  	break;
+		  case "vadan.mircea":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  // set 2
+		  case "eugen.vidolman":
+		  	welcome +=  "Eugen!  :)";
+		  	break;
+		  case "oxana.dima":
+		  	welcome +=  "Oxana, Dima și Damian!  :)";
+		  	break;
+		  // set 3
+		  case "cristi.david":
+		  	welcome +=  "Cristi!  :)";
+		  	break;
+		  case "paul.szanto":
+		  	welcome +=  "Szanto!  :)";
+		  	break;
+		  // Ljublijana
+		  case "paul.boldijar":
+		  	welcome +=  "Paul!  :)";
+		  	break;
+		  // set 2
+		  case "vitalie.valeria":
+		  	welcome +=  "Vitalie și Valeria!  :)";
+		  	break;
+		  // Ljubijana pod
+		  case "daniela.harau":
+		  	welcome +=  "Dani!  :)";
+		  	break;
+		  case "dina":
+		  	welcome +=  "Dina, Anca, Roxana, Ioana și Dani!  :)";
+		  	break;
+		  // set 1
+		  case "cocis.raul":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "fam.purcel":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "finu.marisel":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "ionel.marneanu":
+		  	welcome +=  "tuși Mărioara și unchiu Ionel!  :)";
+		  	break;
+		  case "laurentiu.ungur":
+		  	welcome +=  "Laurențiu!  :)";
+		  	break;
+		  case "loici":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "luci.marinescu":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "mia":
+		  	welcome +=  "Mia!  :)";
+		  	break;
+		  case "mirela.doros":
+		  	welcome +=  "Raluca și Florin!  :)";
+		  	break;
+		  case "muresan.generalu":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "paul.becan":
+		  	welcome +=  "Paul și Carmen!  :)";
+		  	break;
+		  case "petrica.iorga":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "puiu.profu":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "sanda.ladariu":
+		  	welcome +=  "doamna dirigintă!  :)";
+		  	break;
+		  // set 2
+		  case "gheorghe.corghencea":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "ioana.catinean":
+		  	welcome +=  "Ioana!  :)";
+		  	break;
+		  case "mama.ana":
+		  	welcome +=  "mama!  :)";
+		  	break;
+		  case "maria.ana.boutique":
+		  	welcome +=  "Maria!  :)";
+		  	break;
+		  case "ruxi.moldovan":
+		  	welcome +=  "Ruxi!  :)";
+		  	break;
+		  // set 3
+		  case "ecaterina":
+		  	welcome +=  "Cati!  :)";
+		  	break;
+		  case "ioana.jurca":
+		  	welcome +=  "Ioana!  :)";
+		  	break;
+		  case "rares.tomos":
+		  	welcome +=  "Rareș!  :)";
+		  	break;
+		  // Londra
+		  case "anca.resiga":
+		  	welcome +=  "Anca!  :)";
+		  	break;
+		  case "cami.razvan":
+		  	welcome +=  "Cami și Răzvan!  :)";
+		  	break;
+		  case "denisa.dobrescu":
+		  	welcome +=  "Denisa!  :)";
+		  	break;
+		  case "valentina.adrian":
+		  	welcome +=  "Valentina și Adrian!  :)";
+		  	break;
+		  // set 1
+		  case "cati":
+		  	welcome +=  "Căti!  :)";
+		  	break;
+		  case "dragos.natea":
+		  	welcome +=  "Dragoș!  :)";
+		  	break;
+		  case "florin.petrutiu":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "ioana.vadan":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "johhny.pintea":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "lonca.adrian":
+		  	welcome +=  "Adi!  :)";
+		  	break;
+		  case "marc1":
+		  case "marian.hodis":
+		  	welcome +=  "Marian și Ludmila!  :)";
+		  	break;
+		  case "matusa.marna":
+		  	welcome +=  "mătușă!  :)";
+		  	break;
+		  case "oana.trut":
+		  	welcome +=  "Oana și Iulian!  :)";
+		  	break;
+		  case "plesa.mihai":
+		  	welcome +=  "Mihai!  :)";
+		  	break;
+		  case "udvarhely.arpad":
+		  case "vlad.precup":
+		  	welcome +=  "Vlad!  :)";
+		  	break;
+		  // set 2
+		  case "eugen.zinkovschi":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "fam.valean":
+		  	welcome +=  "Ale și Cristi!  :)";
+		  	break;
+		  case "hasna.octavian":
+		  	welcome +=  "Octavian!  :)";
+		  	break;
+		  case "ion.urecheanu":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "laua.goci":
+		  	welcome +=  "Laura!  :)";
+		  	break;
+		  case "razvan.cionca":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "victor.liliana":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  // set 3
+		  case "itu.virgil":
+		  	welcome +=  "Itu!  :)";
+		  	break;
+		  case "iulia.iancu":
+		  	welcome +=  "Iulia și Cipri!  :)";
+		  	break;
+		  // Los Barrios
+		  case "maria.valera":
+		  	welcome +=  "nana Maria și unchiu Valera!  :)";
+		  	break;
+		  // set 1
+		  case "feri":
+		  	welcome +=  "Feri!  :)";
+		  	break;
+		  // set 2
+		  case "eugen.andreea":
+		  	welcome +=  "Eugen și Andreea!  :)";
+		  	break;
+		  case "nicolae.ghimbovschi":
+		  	welcome +=  "Nicu!  :)";
+		  	break;
+		  case "tommy":
+		  	welcome +=  "Tommy!  :)";
+		  	break;
+		  // Transfagarasan
+		  case "adriana.sincu":
+		  	welcome +=  "Adi, Cătă, Patrick și Filip!  :)";
+		  	break;
+		  case "alin.craciun":
+		  	welcome +=  "Alin!  :)";
+		  	break;
+		  case "imy.bernhard":
+		  	welcome +=  "Imy și Bernhard!  :)";
+		  	break;
+		  // set 1
+		  case "bizo.maria":
+		  	welcome +=  "Maria!  :)";
+		  	break;
+		  case "bogdan.oanes":
+		  	welcome +=  "Bogdan și Cristina!  :)";
+		  	break;
+		  case "damaris":
+		  	welcome +=  "Damaris!  :)";
+		  	break;
+		  case "dencu.balasz":
+		  	welcome +=  "Dencu, Dorina și Andi!  :)";
+		  	break;
+		  case "fam.enache":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "floroiu.iulian":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "genesa.romeo":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "lorin.ilas":
+		  	welcome +=  "Lorin și Astrid!  :)";
+		  	break;
+		  case "marcel.marneanu":
+		  	welcome +=  "Marcel și Anca!  :)";
+		  	break;
+		  case "suciu.valer":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "vlad.tamas":
+		  	welcome +=  "Vlad și Teo!  :)";
+		  	break;
+		  // set 2
+		  case "dorina.maxim":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "galina.maxim":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "lorena":
+		  	welcome +=  "Lorena!  :)";
+		  	break;
+		  case "lucia":
+		  	welcome +=  "Lucia!  :)";
+		  	break;
+		  case "raluca.fenesan":
+		  	welcome +=  "Raluca!  :)";
+		  	break;
+		  case "sandor.kiss":
+		  	welcome +=  "Șandor și Ersilia!  :)";
+		  	break;
+		  case "stanean.tudor":
+		  	welcome +=  "Tudor și Denisa!  :)";
+		  	break;
+		  // set 3
+		  case "elena":
+		  	welcome +=  "Elena!  :)";
+		  	break;
+		  case "razvan.rosa":
+		  	welcome +=  "Roșa!  :)";
+		  	break;
+		  // Venetia
+		  case "cristiana.pasca":
+		  	welcome +=  "Cristiana!  :)";
+		  	break;
+		  case "florin.livia":
+		  	welcome +=  "Florin și Livia!  :)";
+		  	break;
+		  case "ionela.mathias":
+		  	welcome +=  "Ionela și Mathias!  :)";
+		  	break;
+		  // set 1
+		  case "dragos.dobrean":
+		  	welcome +=  "Dragoș!  :)";
+		  	break;
+		  case "gabi.soci":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "harpaila":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "marc2":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "mihai.timar":
+		  	welcome +=  "Mihai!  :)";
+		  	break;
+		  case "raluca.claudiu":
+		  	welcome +=  "Raluca și Claudiu!  :)";
+		  	break;
+		  case "razvan.nicoara":
+		  	welcome +=  "Neagu!  :)";
+		  	break;
+		  // set 2
+		  case "ghena.irina":
+		  	welcome +=  "Ghena și Irina!  :)";
+		  	break;
+		  case "nastasa.bogdan":
+		  	welcome +=  "Bogdan și Cristina!  :)";
+		  	break;
+		  // Venetia 2
+		  case "ghena.leti":
+		  // set 1
+		  case "adi.militaru":
+		  	welcome +=  "Adi și Georgiana!  :)";
+		  	break;
+		  case "adina.timar":
+		  	welcome +=  "Adina!  :)";
+		  	break;
+		  case "andi":
+		  	welcome +=  "Ando!  :)";
+		  	break;
+		  case "bogdan.nourescu":
+		  	welcome +=  "Bogdan și Raluca!  :)";
+		  	break;
+		  // set 2
+		  case "anca.bucuresti":
+		  	welcome +=  "Anca!  :)";
+		  	break;
+		  case "gicu.lozovan":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "lili":
+		  	welcome +=  "Timea!  :)";
+		  	break;
+		  // Vidraru
+		  case "bodea.valentin":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "catalina.filipescu":
+		  	welcome +=  "Cătălina și Dudu!  :)";
+		  	break;
+		  case "cristina.marneanu":
+		  	welcome +=  "Cristina!  :)";
+		  	break;
+		  case "iulia.alex":
+		  	welcome +=  "Iulia și Alex!  :)";
+		  	break;
+		  case "michea":
+		  	welcome +=  "Michea!  :)";
+		  	break;
+		  // set 1
+		  case "andreea.mobelrom":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "boca.bogdan":
+		  	welcome +=  "Boca!  :)";
+		  	break;
+		  case "cretu.alexandru":
+		  	welcome +=  "Alex și Roxi!  :)";
+		  	break;
+		  case "dani.sm":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "florin.oarga":
+		  	welcome =  "Dragii noștri!";
+		  	break;
+		  case "ionela.nasa":
+		  	welcome +=  "Ionela!  :)";
+		  	break;
+		  case "laur.andreea":
+		  	welcome +=  "Laur și Andreea!  :)";
+		  	break;
+		  case "madalina.nicolae":
+		  	welcome +=  "Mădă și Cătă!  :)";
+		  	break;
+		  case "magda.alin":
+		  	welcome +=  "Magda și Alin!  :)";
+		  	break;
+		  case "vlad.ardelean":
+		  	welcome +=  "Țu și Iza!  :)";
+		  	break;
+		  case "ziggy.frumosul":
+		  	welcome +=  "Ziggy!  :)";
+		  	break;
+		  // set 2
+		  case "bubu":
+		  	welcome +=  "Bubu!  :)";
+		  	break;
+		  case "denis.iulia":
+		  	welcome +=  "Denis și Iulia!  :)";
+		  	break;
+		  case "dragos.roxi":
+		  	welcome +=  "Dragoș și Roxi!  :)";
+		  	break;
+		  case "florin.antusa":
+		  	welcome +=  "Florin și Antusa!  :)";
+		  	break;
+		  // set 3
+		  case "razvan.candale":
+		  	welcome +=  "Răzvan!  :)";
+		  	break;
+		  default:
+		  	welcome =  "Dragii noștri!";
+		  	break;
+	  	}
+	    document.getElementById('welcome_message').innerHTML = welcome;
+	  
+		$("#time-left")
+			.countdown("2017/04/29 14:00:00", function(event) {
+				 $(this).text(
+				   event.strftime('%D zile %H:%M:%S')
+				 );
+			});
+	};
+	
+	function getQueryVariable(variable) {
+		var query = window.location.search.substring(1);
+		var vars = query.split("&");
+		for (var i=0;i<vars.length;i++) {
+			var pair = vars[i].split("=");
+			if (pair[0] == variable) {
+			  return pair[1];
+			}
+		}
+	}
+  </script>
+</html>
