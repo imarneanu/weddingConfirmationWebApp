@@ -3,61 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Alex&Iulia 29ste April</title>
-    <style media="screen">
-      body {
-        font-family: Roboto, Arial, sans-serif;
-        background: #ECEFF1;
-        color: rgba(0,0,0,0.87);
-      }
-
-      #getting-started {
-        max-width: 400px;
-        margin: 40px auto;
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
-        border-radius: 2px;
-        background: white;
-        padding: 16px 24px;
-        text-align: center;
-        
-        position: fixed;
-	    top: 50%;
-	    left: 50%;
-     	transform: translate(-50%, -50%);
-      }
-      
-      #getting-started h2 {
-        color: #000f55;
-        text-align: center;
-      }
-      
-      #getting-started h3 {
-        color: #000f55;
-        text-align: center;
-      }
-      
-      #getting-started p {
-        font-size: 40px;
-        color: #000f55;
-        font-weight: 300;
-        line-height: 150%;
-        text-align: center;
-      } 
-      
-      #message h1 {
-	    margin-top: 100px;
-        font-size: 22px;
-        font-weight: 500;
-        text-align: center;
-        margin: 0 0 16px;
-      }
-      
-      #returnMessage h4 {
-	    text-align: center;
-      }
-            
-    </style>
+	<link rel="StyleSheet" type="text/css" href="alexiuliawedding.css">
     <script type="text/javascript" src="jquery-3.1.1.slim.min.js"></script>
     <script type="text/javascript" src="jquery.countdown.min.js"></script>
+	<script src="utils.js"></script>
   </head>
 
   <body>
@@ -67,7 +16,7 @@
     <div id="returnMessage">
       <h4>Bitte nochmal ab 29ste März versuchen.</h4>    
     </div>
-    <div id="getting-started">
+    <div id="main-content">
       <h2>Iulia und Alex</h2>
   	  <h3>29ste April 2017</h3>
       <p id="time-left"></p>
@@ -95,16 +44,5 @@
 				 );
 			});
 	};
-	
-	function getQueryVariable(variable) {
-		var query = window.location.search.substring(1);
-		var vars = query.split("&");
-		for (var i=0;i<vars.length;i++) {
-			var pair = vars[i].split("=");
-			if (pair[0] == variable) {
-			  return pair[1];
-			}
-		}
-	}
   </script>
 </html>

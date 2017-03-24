@@ -1,0 +1,50 @@
+body {
+  font-family: Roboto, Arial, sans-serif;
+  background: #ECEFF1;
+  color: rgba(0,0,0,0.87);
+}
+
+#main-content {
+  max-width: 400px;
+  margin: 40px auto;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
+  border-radius: 2px;
+  background: white;
+  padding: 16px 24px;
+  text-align: center;
+  
+  position: fixed;
+top: 50%;
+left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#main-content h2 {
+  color: #000f55;
+  text-align: center;
+}
+
+#main-content h3 {
+  color: #000f55;
+  text-align: center;
+}
+
+#main-content p {
+  font-size: 40px;
+  color: #000f55;
+  font-weight: 300;
+  line-height: 150%;
+  text-align: center;
+} 
+
+#message h1 {
+margin-top: 100px;
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 0 16px;
+}
+
+#returnMessage h4 {
+text-align: center;
+}
