@@ -7,6 +7,7 @@
     <script type="text/javascript" src="jquery-3.1.1.slim.min.js"></script>
     <script type="text/javascript" src="jquery.countdown.min.js"></script>
 	<script src="utils.js"></script>
+	<script src="notification.js"></script>
   </head>
 
   <body>
@@ -25,740 +26,975 @@
 
   <script>
     window.onload = function() {
-	  	var guest = getQueryVariable("guest");
+	  	var guestId = getQueryVariable("guest");
+	  	var guestName;
 	  	var welcome = "Neața, ";
-	  	switch (guest) {
+	  	switch (guestId) {
 	  	  // Barca
 		  case "costi.aliona":
-		  	welcome +=  "Costi și Aliona!  :)";
+		  	welcome +=  "Costi și Aliona! :)";
+		  	guestName = "fam Mursa Costi si Aliona";
 		  	break;
 		  case "dan.stoica":
-		  	welcome +=  "Dan și Dariana!  :)";
+		  	welcome +=  "Dan și Dariana! :)";
+		  	guestName = "Dan Stoica";
 		  	break;
 	  	  // set 1
 		  case "adi.ispas":
-		  	welcome +=  "Adi!  :)";
+		  	welcome +=  "Adi! :)";
+		  	guestName = "Adi Ispas";
 		  	break;
 		  case "corsau.rares":
-		  	welcome +=  "Rareș!  :)";
+		  	welcome +=  "Rareș! :)";
+		  	guestName = "Rares Corsau";
 		  	break;
 		  case "ioana.spiri":
-		  	welcome +=  "Ioana și Spiri!  :)";
+		  	welcome +=  "Ioana și Spiri! :)";
+		  	guestName = "Ioana Aleseei";
 		  	break;
 		  case "magda.claudiu":
-		  	welcome +=  "Magda și Claudiu!  :)";
+		  	welcome +=  "Magda și Claudiu! :)";
+		  	guestName = "fam Creosteanu Claudiu si Magda";
 		  	break;
 		  case "rares.teodorescu":
-		  	welcome +=  "Rareș și Andreea!  :)";
+		  	welcome +=  "Rareș și Andreea! :)";
+		  	guestName = "Rares Teodorescu";
 		  	break;
 		  // set 2
 		  case "costi.nistor":
-		  	welcome =  "Bună, Costi!  :)";
+		  	welcome =  "Bună, Costi! :)";
+		  	guestName = "Costi Nistor";
 		  	break;
 		  case "dan.otilia":
-		  	welcome +=  "Dan și Otilia!  :)";
+		  	welcome +=  "Dan și Otilia! :)";
+		  	guestName = "fam Regheni Dan si Otilia";
 		  	break;
 		  case "mari":
-		  	welcome +=  "Mari!  :)";
+		  	welcome +=  "Mari! :)";
+		  	guestName = "Mari";
 		  	break;
 		  case "nicolae.svetlana":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Nicolae Svetlana";
 		  	break;
 		  // Berlin
 		  case "adina.portaru":
-		  	welcome +=  "Adina și Marius!  :)";
+		  	welcome +=  "Adina și Marius! :)";
+		  	guestName = "fam Portaru Marius si Adina";
 		  	break;
 		  case "vali":
-		  	welcome +=  "Vali!  :)";
+		  	welcome +=  "Vali! :)";
+		  	guestName = "Valentin Luca";
 		  	break;
 		  // set 1
 		  case "adela.toderici":
-		  	welcome +=  "Adela!  :)";
+		  	welcome +=  "Adela! :)";
+		  	guestName = "Adela Toderici";
 		  	break;
 		  case "banut":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Banut";
 		  	break;
 		  case "calin.purcel":
-		  	welcome +=  "Călin!  :)";
+		  	welcome +=  "Călin! :)";
+		  	guestName = "fam Purcel Calin";
 		  	break;
 		  case "cici":
-		  	welcome +=  "Cici!  :)";
+		  	welcome +=  "Cici! :)";
+		  	guestName = "Cici Papoi";
 		  	break;
 		  case "claudia.harangus":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Harangus Claudia";
 		  	break;
 		  case "emil.marneanu":
-		  	welcome +=  "Emil și Gheonghi!  :)";
+		  	welcome +=  "Emil și Gheonghi! :)";
+		  	guestName = "fam Marneanu Emil";
 		  	break;
 		  case "ervin.sarkozi":
-		  	welcome +=  "Sarkozi!  :)";
+		  	welcome +=  "Sarkozi! :)";
+		  	guestName = "Ervin Sarkozi";
 		  	break;
 		  case "fam.mone":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Mone";
 		  	break;
 		  case "gabi.imre":
-		  	welcome +=  "Gabi!  :)";
+		  	welcome +=  "Gabi! :)";
+		  	guestName = "Gabi Imre";
 		  	break;
 		  case "horia.muste":
-		  	welcome +=  "Horia!  :)";
+		  	welcome +=  "Horia! :)";
+		  	guestName = "Horia Muste";
 		  	break;
 		  case "marius.mailat":
-		  	welcome +=  "Marius și Cristina!  :)";
+		  	welcome +=  "Marius și Cristina! :)";
+		  	guestName = "fam Mailat Marius si Cristina";
 		  	break;
 		  case "mihai.milian":
-		  	welcome +=  "Mihai și Dorina!  :)";
+		  	welcome +=  "Mihai și Dorina! :)";
+		  	guestName = "fam Milian Mihai si Dorina";
 		  	break;
 		  case "muresan.francisc":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Muresan Francisc";
 		  	break;
 		  case "olt.dan":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Olt Dan";
 		  	break;
 		  case "romeo.teo":
-		  	welcome +=  "Romi și Teo!  :)";
+		  	welcome +=  "Romi și Tea! :)";
+		  	guestName = "fam Zdrite Romeo si Tea";
 		  	break;
 		  // set 2
 		  case "adela":
-		  	welcome +=  "Adela!  :)";
+		  	welcome +=  "Adela! :)";
+		  	guestName = "Adela Avram";
 		  	break;
 		  case "fam.soare":
-		  	welcome +=  "Simona și Cătălin!  :)";
+		  	welcome +=  "Simona și Cătălin! :)";
+		  	guestName = "fam Soare Catalin si Simona";
 		  	break;
 		  case "hadarean.dan":
-		  	welcome +=  "Dan!  :)";
+		  	welcome +=  "Dan! :)";
+		  	guestName = "Dan Hadarean";
 		  	break;
 		  case "stefan":
-		  	welcome +=  "Ștefan!  :)";
+		  	welcome +=  "Ștefan! :)";
+		  	guestName = "Stefan Endava";
 		  	break;
 		  // set 3
 		  case "anemona":
-		  	welcome +=  "Anemona!  :)";
+		  	welcome +=  "Anemona! :)";
+		  	guestName = "Anemona Hagea";
 		  	break;
 		  // Bukovel
 		  case "andrei.valcea":
-		  	welcome +=  "Andrei!  :)";
+		  	welcome +=  "Andrei! :)";
+		  	guestName = "Andrei Valcea";
 		  	break;
 		  case "aurica.eugen":
-		  	welcome +=  "Aurica și Eugen!  :)";
+		  	welcome +=  "Aurica și Eugen! :)";
+		  	guestName = "fam Lungu Eugen si Aurica";
 		  	break;
 		  case "paul.adina":
-		  	welcome +=  "Paul, Adina și Matei!  :)";
+		  	welcome +=  "Paul, Adina și Matei! :)";
+		  	guestName = "fam Negru Paul si Adina";
 		  	break;
 		  // set 1
 		  case "adina.mandrut":
-		  	welcome +=  "Adina!  :)";
+		  	welcome +=  "Adina! :)";
+		  	guestName = "Adina Mandrut";
 		  	break;
 		  case "balan.gabriela":
-		  	welcome +=  "doamna dirigintă!  :)";
+		  	welcome +=  "doamna dirigintă! :)";
+		  	guestName = "fam Balan Gabriela";
 		  	break;
 		  case "bruma":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Bruma";
 		  	break;
 		  case "calin.marneanu":
 		  	welcome +=  "Călin!  :)";
+		  	guestName = "fam Marneanu Calin";
 		  	break;
 		  case "cosma.gusti":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Gusti Cosma";
 		  	break;
 		  case "dani.hodrea":
 		  	welcome +=  "Dani!  :)";
+		  	guestName = "Dani Hodrea";
 		  	break;
 		  case "ionut.branzei":
 		  	welcome +=  "Ionuț!  :)";
+		  	guestName = "Ionut Branzei";
 		  	break;
 		  case "iza.birs":
 		  	welcome +=  "Iza!  :)";
+		  	guestName = "Iza Birs";
 		  	break;
 		  case "madalin.milian":
 		  	welcome +=  "Mădă!  :)";
+		  	guestName = "Madalin Milian";
 		  	break;
 		  // set 2
 		  case "chifa.mihai":
 		  	welcome +=  "Chifa!  :)";
+		  	guestName = "Chifa Mihai";
 		  	break;
 		  case "fam.apostol":
 		  	welcome +=  "Ion și Cristina!  :)";
+		  	guestName = "fam Apostol Ion si Cristina";
 		  	break;
 		  case "natalia.oleg":
 		  	welcome +=  "Natalia!  :)";
+		  	guestName = "fam Natalia Oleg";
 		  	break;
 		  // Cadiz
 		  case "bianca.dorel":
 		  	welcome +=  "Bianca și Dorel!  :)";
+		  	guestName = "Bianca Pop";
 		  	break;
 		  case "dumitru.stoica":
 		  	welcome +=  "nașu'!  :)";
+		  	guestName = "Dumitru Stoica";
 		  	break;
 		  // set 1
 		  case "catalin.marneanu":
 		  	welcome +=  "Cătă!  :)";
+		  	guestName = "Catalin Marneanu";
 		  	break;
 		  case "catalin.vadan":
 		  	welcome +=  "Cătă!  :)";
+		  	guestName = "Catalin Vadan";
 		  	break;
 		  case "cristi.man":
 		  	welcome +=  "Cristi, Lucia și Andrei!  :)";
+		  	guestName = "fam Cristi Man si Lucia";
 		  	break;
 		  case "fam.frigioiu":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Frigioiu";
 		  	break;
 		  case "georgiana.fantaneanu":
 		  	welcome +=  "Georgi, Narcis, Maria și Ana!  :)";
+		  	guestName = "fam Fantaneanu Narcis si Georigiana";
 		  	break;
 		  case "pascaru":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Pascaru";
 		  	break;
 		  case "sabau.andrei":
 		  	welcome +=  "Andrei!  :)";
+		  	guestName = "Sabau Andrei";
 		  	break;
 		  case "silviu.sorel":
 		  	welcome +=  "Silviu!  :)";
+		  	guestName = "Silviu Sorel";
 		  	break;
 		  // set 2
 		  case "catalin.jurjiu":
 		  	welcome +=  "Cătă!  :)";
+		  	guestName = "Catalin Jurjiu";
 		  	break;
 		  case "cipri":
 		  	welcome +=  "Cipri!  :)";
+		  	guestName = "Cipri Endava";
 		  	break;
 		  case "monica.tomus":
 		  	welcome +=  "Moni!  :)";
+		  	guestName = "Monica Tomus";
 		  	break;
 		  case "nicolae.valentina":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "Nicolae Valentina";
 		  	break;
 		  case "stefan.raciu":
 		  	welcome +=  "Ștefan!  :)";
+		  	guestName = "Stefan Raciu";
 		  	break;
 		  // Litoral
 		  case "bogdan.trastes":
 		  	welcome +=  "Bogdan!  :)";
+		  	guestName = "Bogdan Trastes";
 		  	break;
 		  case "carmen.gabi":
 		  	welcome +=  "Carmen și Gabi!  :)";
+		  	guestName = "fam Peltea Gabi si Carmen";
 		  	break;
 		  case "zoe.romi":
 		  	welcome +=  "Zoe, Romi și Emi!  :)";
+		  	guestName = "Zoica Grecu";
 		  	break;
 		  // set 1
 		  case "angela.mari":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Romi Angela";
 		  	break;
 		  case "bobolicu":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Bobolicu";
 		  	break;
 		  case "cristoltean":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Cristoltean";
 		  	break;
 		  case "ioana.maris":
-		  	welcome +=  "Ioana și Aliona!  :)";
+		  	welcome +=  "Ioana și Alex!  :)";
+		  	guestName = "Ioana Maris";
 		  	break;
 		  case "laura.bogdan":
 		  	welcome +=  "Laura și Bogdan!  :)";
+		  	guestName = "fam Filimon Bogdan si Laura";
 		  	break;
 		  case "magdalena.stan":
 		  	welcome +=  "Magda!  :)";
+		  	guestName = "Magdalena Stan";
 		  	break;
 		  case "marius.maricean":
 		  	welcome +=  "Marius!  :)";
+		  	guestName = "Marius Maricean";
 		  	break;
 		  case "mioara.negoita":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "Mioara Negoita";
 		  	break;
 		  case "nenea.berkes":
-		  	welcome +=  "Costi și Aliona!  :)";
+		  	welcome +=  "nenea Berkes!  :)";
+		  	guestName = "nenea Berkes";
 		  	break;
 		  case "oana.bianca":
 		  	welcome +=  "Oana Bianca!  :)";
+		  	guestName = "Oana Bianca";
 		  	break;
 		  case "ovidiu.oros":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Oros Ovidiu";
 		  	break;
 		  case "sabin.stoica":
 		  	welcome +=  "Sabin!  :)";
+		  	guestName = "Sabin Stoica";
 		  	break;
 		  case "trisca.tudor":
 		  	welcome +=  "Trișcă!  :)";
+		  	guestName = "Tudor Trisca";
 		  	break;
 		  case "uifalean.laura":
 		  	welcome +=  "Laura și Marius!  :)";
+		  	guestName = "fam Uifalean Marius si Laura";
 		  	break;
 		  case "vadan.sabina":
 		  	welcome +=  "Nelu și Sabina!  :)";
+		  	guestName = "fam Vadan Nelu";
 		  	break;
 		  case "vasile.todea":
 		  	welcome +=  "Vasile!  :)";
+		  	guestName = "Vasile Todea";
 		  	break;
 		  // set 2
 		  case "alex.graur":
 		  	welcome +=  "Alex!  :)";
+		  	guestName = "Alex Graur";
 		  	break;
 		  case "alexandru.gama":
 		  	welcome =  "Bună, Alexandru!  :)";
+		  	guestName = "Alex Gama";
 		  	break;
 		  case "boga.mihai":
 		  	welcome +=  "Boga!  :)";
+		  	guestName = "Boga Mihai";
 		  	break;
 		  case "lucian.livia":
 		  	welcome +=  "Lucian și Livia!  :)";
+		  	guestName = "fam Petrusel Lucian si Livia";
 		  	break;
 		  case "mama.tata":
 		  	welcome +=  "mama și tata!  :)";
+		  	guestName = "fam Marneanu Vasile si Olga";
 		  	break;
 		  // set 3
 		  case "darian.onaciu":
 		  	welcome +=  "Darian!  :)";
+		  	guestName = "Darian Onaciu";
 		  	break;
 		  case "mircea.ponorean":
 		  	welcome +=  "Mircea!  :)";
+		  	guestName = "Mircea Ponorean";
 		  	break;
 		  // Litoral2
 		  case "ileana.ion":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Ileana si Ion";
 		  	break;
 		  case "tavi.corina":
 		  	welcome +=  "Tavi și Corina!  :)";
+		  	guestName = "fam Anaca";
 		  	break;
 		  // set 1
 		  case "alex.melania":
 		  	welcome +=  "Alex și Mela!  :)";
+		  	guestName = "fam Moldovan Alex si Mela";
 		  	break;
 		  case "costel":
 		  	welcome +=  "Costel!  :)";
+		  	guestName = "Costel";
 		  	break;
 		  case "gabi.oros":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Gabi Oros";
 		  	break;
 		  case "gavrilutiu":
 		  	welcome =  "Doamna învățătoare!";
+		  	guestName = "fam Gavrilutiu";
 		  	break;
 		  case "hosu.vlad":
 		  	welcome +=  "Vlad!  :)";
+		  	guestName = "Hosu Vlad";
 		  	break;
 		  case "ionica.varga":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Varga Ionica";
 		  	break;
 		  case "irimia.emilia":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Irimia";
 		  	break;
 		  case "nasa.mia":
 		  	welcome +=  "nașa Mia și Teodora!  :)";
+		  	guestName = "nasa Mia si Teo";
 		  	break;
 		  case "raul.bodea":
 		  	welcome +=  "Raul și Diana!  :)";
+		  	guestName = "Raul Bodea";
 		  	break;
 		  case "sebi.boga":
-		  	welcome +=  "Boga!  :)";
+		  	welcome +=  "Sebi!  :)";
+		  	guestName = "Sebi Boga";
 		  	break;
 		  case "tusa.moni":
 		  	welcome +=  "Moni!  :)";
+		  	guestName = "tusa Moni";
 		  	break;
 		  case "vadan.mircea":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Vadan Mircea";
 		  	break;
 		  // set 2
 		  case "eugen.vidolman":
 		  	welcome +=  "Eugen!  :)";
+		  	guestName = "Eugen Vidolman";
 		  	break;
 		  case "oxana.dima":
 		  	welcome +=  "Oxana, Dima și Damian!  :)";
+		  	guestName = "fam Creanga Dima, Oxana si Damian";
 		  	break;
 		  // set 3
 		  case "cristi.david":
 		  	welcome +=  "Cristi!  :)";
+		  	guestName = "Cristi David";
 		  	break;
 		  case "paul.szanto":
 		  	welcome +=  "Szanto!  :)";
+		  	guestName = "Szanto Paul";
 		  	break;
 		  // Ljublijana
 		  case "paul.boldijar":
 		  	welcome +=  "Paul!  :)";
+		  	guestName = "Paul Boldijar";
 		  	break;
 		  // set 2
 		  case "vitalie.valeria":
 		  	welcome +=  "Vitalie și Valeria!  :)";
+		  	guestName = "Vitalie Croitor";
 		  	break;
 		  // Ljubijana pod
 		  case "daniela.harau":
 		  	welcome +=  "Dani!  :)";
+		  	guestName = "fam Harau Daniela";
 		  	break;
 		  case "dina":
 		  	welcome +=  "Dina, Anca, Roxana, Ioana și Dani!  :)";
+		  	guestName = "fam Carvatchi";
 		  	break;
 		  // set 1
 		  case "cocis.raul":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Cocis Raul";
 		  	break;
 		  case "fam.purcel":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Purcel";
 		  	break;
 		  case "finu.marisel":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "finu Marisel";
 		  	break;
 		  case "ionel.marneanu":
 		  	welcome +=  "tuși Mărioara și unchiu Ionel!  :)";
+		  	guestName = "fam Marneanu Ionel si Marioara";
 		  	break;
 		  case "laurentiu.ungur":
 		  	welcome +=  "Laurențiu!  :)";
+		  	guestName = "Laurentiu Ungur";
 		  	break;
 		  case "loici":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Loici";
 		  	break;
 		  case "luci.marinescu":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Luci Marinescu";
 		  	break;
 		  case "mia":
 		  	welcome +=  "Mia!  :)";
+		  	guestName = "Mia";
 		  	break;
 		  case "mirela.doros":
 		  	welcome +=  "Raluca și Florin!  :)";
+		  	guestName = "vara Raluca";
 		  	break;
 		  case "muresan.generalu":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "muresan generalu";
 		  	break;
 		  case "paul.becan":
 		  	welcome +=  "Paul și Carmen!  :)";
+		  	guestName = "fam Becan Paul si Carmen";
 		  	break;
 		  case "petrica.iorga":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Petrica Iorga";
 		  	break;
 		  case "puiu.profu":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Puiu profu";
 		  	break;
 		  case "sanda.ladariu":
 		  	welcome +=  "doamna dirigintă!  :)";
+		  	guestName = "fam Ladariu Sandu si Dana";
 		  	break;
 		  // set 2
 		  case "gheorghe.corghencea":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Gheorghe Corghencea";
 		  	break;
 		  case "ioana.catinean":
 		  	welcome +=  "Ioana!  :)";
+		  	guestName = "fam Catinean Ioana";
 		  	break;
 		  case "mama.ana":
 		  	welcome +=  "mama!  :)";
+		  	guestName = "mama ana";
 		  	break;
 		  case "maria.ana.boutique":
 		  	welcome +=  "Maria!  :)";
+		  	guestName = "Maria Ana Boutique";
 		  	break;
 		  case "ruxi.moldovan":
 		  	welcome +=  "Ruxi!  :)";
+		  	guestName = "Ruxi Moldovan";
 		  	break;
 		  // set 3
 		  case "ecaterina":
 		  	welcome +=  "Cati!  :)";
+		  	guestName = "Ecaterina";
 		  	break;
 		  case "ioana.jurca":
 		  	welcome +=  "Ioana!  :)";
+		  	guestName = "fam Bunau Ioana";
 		  	break;
 		  case "rares.tomos":
 		  	welcome +=  "Rareș!  :)";
+		  	guestName = "fam Tomos Rares";
 		  	break;
 		  // Londra
 		  case "anca.resiga":
 		  	welcome +=  "Anca!  :)";
+		  	guestName = "Anca Resiga";
 		  	break;
 		  case "cami.razvan":
 		  	welcome +=  "Cami și Răzvan!  :)";
+		  	guestName = "fam Musca Razvan si Cami";
 		  	break;
 		  case "denisa.dobrescu":
 		  	welcome +=  "Denisa!  :)";
+		  	guestName = "fam Dobrescu Denisa";
 		  	break;
 		  case "valentina.adrian":
 		  	welcome +=  "Valentina și Adrian!  :)";
+		  	guestName = "Valentina si Adrian";
 		  	break;
 		  // set 1
 		  case "cati":
 		  	welcome +=  "Căti!  :)";
+		  	guestName = "Cati Necsulescu";
 		  	break;
 		  case "dragos.natea":
 		  	welcome +=  "Dragoș!  :)";
+		  	guestName = "Dragos Natea";
 		  	break;
 		  case "florin.petrutiu":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Petrutiu Florin";
 		  	break;
 		  case "ioana.vadan":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Vadan Ioana";
 		  	break;
 		  case "johhny.pintea":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Pintea Johnny";
 		  	break;
 		  case "lonca.adrian":
 		  	welcome +=  "Adi!  :)";
+		  	guestName = "fam Lonca Adrian";
 		  	break;
 		  case "marc1":
+		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Marc 1";
+		  	break;
 		  case "marian.hodis":
 		  	welcome +=  "Marian și Ludmila!  :)";
+		  	guestName = "fam Hodis Marian si Ludmila";
 		  	break;
 		  case "matusa.marna":
 		  	welcome +=  "mătușă!  :)";
+		  	guestName = "matusa Marna";
 		  	break;
 		  case "oana.trut":
 		  	welcome +=  "Oana și Iulian!  :)";
+		  	guestName = "fam Trut Iulian si Oana";
 		  	break;
 		  case "plesa.mihai":
 		  	welcome +=  "Mihai!  :)";
+		  	guestName = "Plesa Mihai";
 		  	break;
 		  case "udvarhely.arpad":
+		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Udvarhely Arpad";
+		  	break;
 		  case "vlad.precup":
 		  	welcome +=  "Vlad!  :)";
+		  	guestName = "Vlad Precup";
 		  	break;
 		  // set 2
 		  case "eugen.zinkovschi":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "Eugen Zinkovschi";
 		  	break;
 		  case "fam.valean":
 		  	welcome +=  "Ale și Cristi!  :)";
+		  	guestName = "fam Valean Cristi si Ale";
 		  	break;
 		  case "hasna.octavian":
 		  	welcome +=  "Octavian!  :)";
+		  	guestName = "Octavian Hasna";
 		  	break;
 		  case "ion.urecheanu":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "Ion Urecheanu";
 		  	break;
-		  case "laua.goci":
+		  case "laura.goci":
 		  	welcome +=  "Laura!  :)";
+		  	guestName = "Laura Goci";
 		  	break;
 		  case "razvan.cionca":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "Razvan Cionca";
 		  	break;
 		  case "victor.liliana":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Victor si Liliana";
 		  	break;
 		  // set 3
 		  case "itu.virgil":
 		  	welcome +=  "Itu!  :)";
+		  	guestName = "Virgil Itu";
 		  	break;
 		  case "iulia.iancu":
 		  	welcome +=  "Iulia și Cipri!  :)";
+		  	guestName = "Iulia Iancu";
 		  	break;
 		  // Los Barrios
 		  case "maria.valera":
 		  	welcome +=  "nana Maria și unchiu Valera!  :)";
+		  	guestName = "fam Maria si Valera";
 		  	break;
 		  // set 1
 		  case "feri":
 		  	welcome +=  "Feri!  :)";
+		  	guestName = "Ferenc Laszloffy";
 		  	break;
 		  // set 2
 		  case "eugen.andreea":
 		  	welcome +=  "Eugen și Andreea!  :)";
+		  	guestName = "fam Regheni Eugen si Andreea";
 		  	break;
 		  case "nicolae.ghimbovschi":
 		  	welcome +=  "Nicu!  :)";
+		  	guestName = "Nicolae Ghimbovschi";
 		  	break;
 		  case "tommy":
 		  	welcome +=  "Tommy!  :)";
+		  	guestName = "Tommy";
 		  	break;
 		  // Transfagarasan
 		  case "adriana.sincu":
 		  	welcome +=  "Adi, Cătă, Patrick și Filip!  :)";
+		  	guestName = "fam Horvath Cata si Adi";
 		  	break;
 		  case "alin.craciun":
 		  	welcome +=  "Alin!  :)";
+		  	guestName = "Alin Craciun";
 		  	break;
 		  case "imy.bernhard":
 		  	welcome +=  "Imy și Bernhard!  :)";
+		  	guestName = "Timea Turdean";
 		  	break;
 		  // set 1
 		  case "bizo.maria":
 		  	welcome +=  "Maria!  :)";
+		  	guestName = "Bizo Maria";
 		  	break;
 		  case "bogdan.oanes":
 		  	welcome +=  "Bogdan și Cristina!  :)";
+		  	guestName = "Bogdan Oanes";
 		  	break;
 		  case "damaris":
 		  	welcome +=  "Damaris!  :)";
+		  	guestName = "Damaris";
 		  	break;
 		  case "dencu.balasz":
 		  	welcome +=  "Dencu, Dorina și Andi!  :)";
+		  	guestName = "fam Balasz Dencu si Dorina";
 		  	break;
 		  case "fam.enache":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Enache";
 		  	break;
 		  case "floroiu.iulian":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Floroiu Iulian";
 		  	break;
 		  case "genesa.romeo":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Genesa si Romeo";
 		  	break;
 		  case "lorin.ilas":
 		  	welcome +=  "Lorin și Astrid!  :)";
+		  	guestName = "fam Ilas Lorin si Astrid";
 		  	break;
 		  case "marcel.marneanu":
 		  	welcome +=  "Marcel și Anca!  :)";
+		  	guestName = "fam Marneanu Marcel si Anca";
 		  	break;
 		  case "suciu.valer":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Suciu Valer";
 		  	break;
 		  case "vlad.tamas":
 		  	welcome +=  "Vlad și Teo!  :)";
+		  	guestName = "Vlad Tamas";
 		  	break;
 		  // set 2
 		  case "dorina.maxim":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Maxim si Dorina";
 		  	break;
 		  case "galina.maxim":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Maxim si Galina";
 		  	break;
 		  case "lorena":
 		  	welcome +=  "Lorena!  :)";
+		  	guestName = "Lorena Daian";
 		  	break;
 		  case "lucia":
 		  	welcome +=  "Lucia!  :)";
+		  	guestName = "Lucia";
 		  	break;
 		  case "raluca.fenesan":
 		  	welcome +=  "Raluca!  :)";
+		  	guestName = "Raluca Fenesan";
 		  	break;
 		  case "sandor.kiss":
 		  	welcome +=  "Șandor și Ersilia!  :)";
+		  	guestName = "fam Kiss Sandor";
 		  	break;
 		  case "stanean.tudor":
 		  	welcome +=  "Tudor și Denisa!  :)";
+		  	guestName = "Stanean Tudor";
 		  	break;
 		  // set 3
 		  case "elena":
 		  	welcome +=  "Elena!  :)";
+		  	guestName = "Elena conservator";
 		  	break;
 		  case "razvan.rosa":
 		  	welcome +=  "Roșa!  :)";
+		  	guestName = "Rosa Razvan";
 		  	break;
 		  // Venetia
 		  case "cristiana.pasca":
 		  	welcome +=  "Cristiana!  :)";
+		  	guestName = "Cristiana Pasca";
 		  	break;
 		  case "florin.livia":
 		  	welcome +=  "Florin și Livia!  :)";
+		  	guestName = "fam Negru Florin si Livia";
 		  	break;
 		  case "ionela.mathias":
 		  	welcome +=  "Ionela și Mathias!  :)";
+		  	guestName = "Ionela Zaharia";
 		  	break;
 		  // set 1
 		  case "dragos.dobrean":
 		  	welcome +=  "Dragoș!  :)";
+		  	guestName = "Dragos Dobreab";
 		  	break;
 		  case "gabi.soci":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Soci Gabi";
 		  	break;
 		  case "harpaila":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Harpaila";
 		  	break;
 		  case "marc2":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Marc 2";
 		  	break;
 		  case "mihai.timar":
 		  	welcome +=  "Mihai!  :)";
+		  	guestName = "Mihai Timar";
 		  	break;
 		  case "raluca.claudiu":
 		  	welcome +=  "Raluca și Claudiu!  :)";
+		  	guestName = "fam Alban Claudiu si Raluca";
 		  	break;
 		  case "razvan.nicoara":
 		  	welcome +=  "Neagu!  :)";
+		  	guestName = "Razvan Nicoara";
 		  	break;
 		  // set 2
 		  case "ghena.irina":
 		  	welcome +=  "Ghena și Irina!  :)";
+		  	guestName = "fam Ghena si Irina";
 		  	break;
 		  case "nastasa.bogdan":
 		  	welcome +=  "Bogdan și Cristina!  :)";
+		  	guestName = "fam Nastasa Bogdan si Cristina";
 		  	break;
 		  // Venetia 2
 		  case "ghena.leti":
+		  	welcome =  "Dragii noștri!";
+		  	guestName = "Ghena";
 		  // set 1
 		  case "adi.militaru":
 		  	welcome +=  "Adi și Georgiana!  :)";
+		  	guestName = "fam Militaru Adi si Georgiana";
 		  	break;
 		  case "adina.timar":
 		  	welcome +=  "Adina!  :)";
+		  	guestName = "Adina Timar";
 		  	break;
 		  case "andi":
-		  	welcome +=  "Ando!  :)";
+		  	welcome +=  "Andi!  :)";
+		  	guestName = "Andi";
 		  	break;
 		  case "bogdan.nourescu":
 		  	welcome +=  "Bogdan și Raluca!  :)";
+		  	guestName = "Bogdan Nourescu";
 		  	break;
 		  // set 2
 		  case "anca.bucuresti":
 		  	welcome +=  "Anca!  :)";
+		  	guestName = "fam Budaca Anca";
 		  	break;
 		  case "gicu.lozovan":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Lozovan Gicu";
 		  	break;
 		  case "lili":
 		  	welcome +=  "Timea!  :)";
+		  	guestName = "Timea Varga";
 		  	break;
 		  // Vidraru
 		  case "bodea.valentin":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Bodea Valentin";
 		  	break;
 		  case "catalina.filipescu":
 		  	welcome +=  "Cătălina și Dudu!  :)";
+		  	guestName = "Catalina Filipescu";
 		  	break;
 		  case "cristina.marneanu":
 		  	welcome +=  "Cristina!  :)";
+		  	guestName = "Cristina Marneanu";
 		  	break;
 		  case "iulia.alex":
 		  	welcome +=  "Iulia și Alex!  :)";
+		  	guestName = "fam David Alex si Iulia";
 		  	break;
 		  case "michea":
 		  	welcome +=  "Michea!  :)";
+		  	guestName = "Michea";
 		  	break;
 		  // set 1
 		  case "andreea.mobelrom":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "Andreea Mobelrom";
 		  	break;
 		  case "boca.bogdan":
 		  	welcome +=  "Boca!  :)";
+		  	guestName = "Bogdan Boca";
 		  	break;
 		  case "cretu.alexandru":
-		  	welcome +=  "Alex și Roxi!  :)";
+		  	welcome +=  "Alex și Roxi! :)";
+		  	guestName = "fam Cretu Alex si Roxi";
 		  	break;
 		  case "dani.sm":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Dani sm";
 		  	break;
 		  case "florin.oarga":
 		  	welcome =  "Dragii noștri!";
+		  	guestName = "fam Oarga Florin";
 		  	break;
 		  case "ionela.nasa":
-		  	welcome +=  "Ionela!  :)";
+		  	welcome +=  "Ionela! :)";
+		  	guestName = "Ionela nasa";
 		  	break;
 		  case "laur.andreea":
-		  	welcome +=  "Laur și Andreea!  :)";
+		  	welcome +=  "Laur și Andreea! :)";
+		  	guestName = "Laurentiu Marneanu";
 		  	break;
 		  case "madalina.nicolae":
 		  	welcome +=  "Mădă și Cătă!  :)";
+		  	guestName = "fam Nicolae Cata si Mada";
 		  	break;
 		  case "magda.alin":
-		  	welcome +=  "Magda și Alin!  :)";
+		  	welcome +=  "Magda și Alin! :)";
+		  	guestName = "fam Miu Alin si Magda";
 		  	break;
 		  case "vlad.ardelean":
-		  	welcome +=  "Țu și Iza!  :)";
+		  	welcome +=  "Țu și Iza! :)";
+		  	guestName = "fam Ardelean Vlad si Iza";
 		  	break;
 		  case "ziggy.frumosul":
 		  	welcome +=  "Ziggy!  :)";
+		  	guestName = "fam Pop Laurentiu";
 		  	break;
 		  // set 2
 		  case "bubu":
 		  	welcome +=  "Bubu!  :)";
+		  	guestName = "Bubu";
 		  	break;
 		  case "denis.iulia":
 		  	welcome +=  "Denis și Iulia!  :)";
+		  	guestName = "Denis Palii";
 		  	break;
 		  case "dragos.roxi":
 		  	welcome +=  "Dragoș și Roxi!  :)";
+		  	guestName = "Dragos Filipovici";
 		  	break;
 		  case "florin.antusa":
 		  	welcome +=  "Florin și Antusa!  :)";
+		  	guestName = "fam Florin si Antusa";
 		  	break;
 		  // set 3
 		  case "razvan.candale":
 		  	welcome +=  "Răzvan!  :)";
+		  	guestName = "Razvan Candale";
 		  	break;
 		  default:
 		  	welcome =  "Dragii noștri!";
 		  	break;
 	  	}
 	    document.getElementById('welcome_message').innerHTML = welcome;
+	  	sendNotificationPageAccessed(guestId, guestName);
 	  
 		$("#time-left")
 			.countdown("2017/04/29 14:00:00", function(event) {

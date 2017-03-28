@@ -10,7 +10,6 @@
 	    }
     </style>
 	<script src="utils.js"></script>
-	<script src="notification.js"></script>
   </head>
 
   <body>
@@ -22,7 +21,6 @@
   <script>
     window.onload = function() {
 	  	var guest = getQueryVariable("guest");
-	  	sendNotificationPageAccessed(guest);
 	  	var content;
 	  	switch(guest) {
 		  case "alex.cretu":

@@ -1,14 +1,41 @@
-function sendNotificationPageAccessed(variable) {
+function sendNotificationPageAccessed(guestId, guestName) {
+	var today = new Date();
+	var hh = today.getHours();
+	var min = today.getMinutes();
+	var dd = today.getDate();
+	var mm = today.getMonth() + 1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if (hh < 10) {
+		hh = '0' + hh;
+	}
+
+	if (min < 10) {
+		min = '0' + min;
+	}
+
+	if (dd < 10) {
+	    dd = '0' + dd;
+	} 
+
+	if (mm < 10) {
+	    mm = '0'+ mm;
+	} 
+
+	today = dd + '.' + mm + '.' + yyyy + ' ' + hh + ':' + min;
+
 	var url = "https://fcm.googleapis.com/fcm/send";
 	var method = "POST";
-	var postData = "{\"to\":\"fojBGdW-eqM:APA91bEJce0idSs-gHug6g6gMLg9fM0UGzCADsyTWMV6sxq7QSYtoT1RjfWFTVknzEIUeolpfSFUIbiWkFGV1bpCMgQbH8sr3PxcUDVer1Nt_GEECtDFu9WQIsDThZvAtR_pMDs48pIx\",\"data\":{\"guest\":\"" + variable + "\"}}";
+	var postData = "{\"to\":\"dViY4qbMkN8:APA91bH2Y3V5v_L9q1UyOZdndySXH8DSdb8DFViA0cZats6S0FJEpBKk6GWRPTwNVIaTJ4a_hsuvEqKgO_8fPqhxk57JNyUkSJSVrDC0Sb79P_5rgSoLNBBnxMXg91Viim5fgP6ws2lR\",\"data\":{\"guest\":\"" + guestId + "\", \"name\":\"" + guestName + "\", \"timestamp\":\"" + today + "\"}}";
+	alert(postData);
 
 	var async = true;
 	var request = new XMLHttpRequest();
 
 	request.onload = function () {
-	   var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
-	   var data = request.responseText; // Returned data, e.g., an HTML document.
+	    var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
+		var data = request.responseText; // Returned data, e.g., an HTML document.
+	    alert('status: ' + status + ' ' + data);
 	}
 
 	request.open(method, url, async);

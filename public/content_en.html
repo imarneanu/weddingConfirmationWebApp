@@ -7,6 +7,7 @@
     <script type="text/javascript" src="jquery-3.1.1.slim.min.js"></script>
     <script type="text/javascript" src="jquery.countdown.min.js"></script>
 	<script src="utils.js"></script>
+	<script src="notification.js"></script>
   </head>
 
   <body>
@@ -25,32 +26,40 @@
 
   <script>
     window.onload = function(){
-	  	var guest = getQueryVariable("guest");
+	  	var guestId = getQueryVariable("guest");
+	  	var guestName;
 	  	var welcome = "Neața,  ";
 
-	  	switch(guest) {
+	  	switch(guestId) {
 		  case "markus.gemma":
 		    welcome += "Markus and Gemma!";
+	  	    guestName = "Markus and Gemma";
 		    break;
 		  case "katja.kramberger":		    
 		  	welcome += "Katja!";
+	  	    guestName = "Katja";
 		    break;
 		  case "amaris.castanon":	    
 		  	welcome += "Amaris!";
+	  	    guestName = "Amaris";
 		    break;
 		  case "anton.olga":	    
 		  	welcome += "Anton and Olga!";
+	  	    guestName = "Anton and Olga";
 		    break;
 		  case "franz.valeria":	    
 		  	welcome += "Franz and Valeria!";
+	  	    guestName = "Franz and Valeria";
 		    break;
 		  case "niccolo.constantini":	    
 		  	welcome += "dear ex-husband ;)";
+	  	    guestName = "Niccolo Constantini";
 		    break;
 		  default:
-		  	welcome = guest + "!";
+		  	welcome = guestId + "!";
 		}
 		document.getElementById('welcome_message').innerHTML = welcome;
+	  	sendNotificationPageAccessed(guestId, guestName);
 	  
 		$("#time-left")
 			.countdown("2017/04/29 14:00:00", function(event) {
