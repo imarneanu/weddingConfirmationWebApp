@@ -1,4 +1,4 @@
-function sendNotificationPageAccessed(guestId, guestName) {
+function sendNotificationPageAccessed(token, guestId, guestName) {
 	var today = new Date();
 	var hh = today.getHours();
 	var min = today.getMinutes();
@@ -26,7 +26,7 @@ function sendNotificationPageAccessed(guestId, guestName) {
 
 	var url = "https://fcm.googleapis.com/fcm/send";
 	var method = "POST";
-	var postData = "{\"to\":\"dViY4qbMkN8:APA91bH2Y3V5v_L9q1UyOZdndySXH8DSdb8DFViA0cZats6S0FJEpBKk6GWRPTwNVIaTJ4a_hsuvEqKgO_8fPqhxk57JNyUkSJSVrDC0Sb79P_5rgSoLNBBnxMXg91Viim5fgP6ws2lR\",\"data\":{\"guest\":\"" + guestId + "\", \"name\":\"" + guestName + "\", \"timestamp\":\"" + today + "\"}}";
+	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"name\":\"" + guestName + "\", \"timestamp\":\"" + today + "\"}}";
 	alert(postData);
 
 	var async = true;

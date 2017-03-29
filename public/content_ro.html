@@ -994,7 +994,18 @@
 		  	break;
 	  	}
 	    document.getElementById('welcome_message').innerHTML = welcome;
-	  	sendNotificationPageAccessed(guestId, guestName);
+
+		var url = "https://iuliaalexwedding.firebaseio.com/token.json";
+		var method = "GET";
+		var async = true;
+		var request = new XMLHttpRequest();
+		request.onreadystatechange = function() {
+		    if (request.readyState == XMLHttpRequest.DONE) {
+	  			sendNotificationPageAccessed(JSON.parse(request.responseText).token, guestId, guestName);
+		    }
+		}
+		request.open(method, url, async);
+		request.send(null);
 	  
 		$("#time-left")
 			.countdown("2017/04/29 14:00:00", function(event) {
