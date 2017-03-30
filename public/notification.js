@@ -58,3 +58,12 @@ Notification.sendPageAccessedNotification = function(token, guestId, guestName) 
 	request.setRequestHeader("Authorization", "key=AAAAqZqRnA0:APA91bGTTmNyjxL2yK8k8r4JTSa4jcVWFTDnZZEjW8WzFnCIbRYb9U30lHFHdZzyQgk_AuknDbj2DKS6SFzo5qP0FX9F3Xb05YXf_Y1Y2l7R8zHGkAJ5he-CyopJ2XIW2m71OSJtmEHk");
 	request.send(postData);
 };
+
+Notification.sendWithFemalePartnerConfirmation = function() {
+	var x = document.getElementById("confirmation-female-partner");
+    var i;
+    // Last element is the button
+    for (i = 0; i < x.length - 1 ;i++) {
+        alert(x.elements[i].value);
+    }
+};

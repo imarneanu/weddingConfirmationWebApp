@@ -27,7 +27,16 @@
 	<div id="confirmation-dialog" class="modal">
 	  <div class="modal-content">
 	    <span class="close">&times;</span>
-	    <p>Some text in the Modal..</p>
+	    <form id="confirmation-male-partner">
+			Nume și prenume: <input type="text" name="guest_name"><br>
+		  	Numele partenerului: <input type="text" name="partner_name"><br>
+			<button  onclick="Notification.sendWithPartnerConfirmation()" class="blue">Confirmați</button>
+	    </form>
+	    <form id="confirmation-female-partner">
+			Nume și prenume: <input type="text" name="guest_name"><br>
+		  	Numele partenerei: <input type="text" name="partner_name"><br>
+			<button  onclick="Notification.sendWithPartnerConfirmation()" class="blue">Confirmați</button>
+	    </form>
 	  </div>
 	</div>
   </body>
@@ -40,6 +49,7 @@
 	  	var guestId = Utils.getQueryVariable("guest");
 	  	var guestName;
 	  	var welcome = "Neața, ";
+	  	var confirmationForm;
 	  	switch (guestId) {
 	  	  // Barca
 		  case "costi.aliona":
@@ -48,7 +58,8 @@
 		  	break;
 		  case "dan.stoica":
 		  	welcome +=  "Dan și Dariana! :)";
-		  	guestName = "Dan Stoica";
+		  	guestName = "Dan Stoica"; 
+		  	confirmationForm = document.getElementById('confirmation-female-partner');
 		  	break;
 	  	  // set 1
 		  case "adi.ispas":
@@ -62,6 +73,7 @@
 		  case "ioana.spiri":
 		  	welcome +=  "Ioana și Spiri! :)";
 		  	guestName = "Ioana Aleseei";
+		  	confirmationForm = document.getElementById('confirmation-male-partner');
 		  	break;
 		  case "magda.claudiu":
 		  	welcome +=  "Magda și Claudiu! :)";
@@ -1006,6 +1018,8 @@
 	  	}
 	    document.getElementById('welcome-message').innerHTML = welcome;
 		Notification.sendNotification(guestId, guestName);
+
+		confirmationForm.style.display = "block";
 	};
   </script>
 </html>
