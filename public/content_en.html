@@ -25,8 +25,9 @@
   </body>
 
   <script>
-    window.onload = function(){
-	  	var guestId = getQueryVariable("guest");
+    window.onload = function() {
+		Utils.setEnglishTime();
+	  	var guestId = Utils.getQueryVariable("guest");
 	  	var guestName;
 	  	var welcome = "Neața,  ";
 
@@ -60,14 +61,6 @@
 		}
 		document.getElementById('welcome-message').innerHTML = welcome;
 		Notification.sendNotification(guestId, guestName);
-	  
-		$("#time-left")
-			.countdown("2017/04/29 14:00:00", function(event) {
-				 $(this).text(
-				   event.strftime('%D days %H:%M:%S')
-				 );
-			}
-		);
 	};
   </script>
 </html>

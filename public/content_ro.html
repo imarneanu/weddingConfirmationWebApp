@@ -26,7 +26,8 @@
 
   <script>
     window.onload = function() {
-	  	var guestId = getQueryVariable("guest");
+		Utils.setRomanianTime();
+	  	var guestId = Utils.getQueryVariable("guest");
 	  	var guestName;
 	  	var welcome = "Neața, ";
 	  	switch (guestId) {
@@ -995,14 +996,6 @@
 	  	}
 	    document.getElementById('welcome-message').innerHTML = welcome;
 		Notification.sendNotification(guestId, guestName);
-	  
-		$("#time-left")
-			.countdown("2017/04/29 14:00:00", function(event) {
-				 $(this).text(
-				   event.strftime('%D zile %H:%M:%S')
-				 );
-			}
-		);
 	};
   </script>
 </html>
