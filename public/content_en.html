@@ -12,9 +12,9 @@
 
   <body>
     <div id="message">
-      <h1 id="welcome_message"></h1>    
+      <h1 id="welcome-message"></h1>    
     </div>
-    <div id="returnMessage">
+    <div id="return-message">
       <h4>Please come back March 29th.</h4>    
     </div>
     <div id="main-content">
@@ -58,15 +58,16 @@
 		  default:
 		  	welcome = guestId + "!";
 		}
-		document.getElementById('welcome_message').innerHTML = welcome;
-	  	sendNotificationPageAccessed(guestId, guestName);
+		document.getElementById('welcome-message').innerHTML = welcome;
+		Notification.sendNotification(guestId, guestName);
 	  
 		$("#time-left")
 			.countdown("2017/04/29 14:00:00", function(event) {
 				 $(this).text(
 				   event.strftime('%D days %H:%M:%S')
 				 );
-			});
+			}
+		);
 	};
   </script>
 </html>

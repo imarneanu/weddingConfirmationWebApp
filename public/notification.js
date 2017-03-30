@@ -1,4 +1,20 @@
-function sendNotificationPageAccessed(token, guestId, guestName) {
+function Notification() {}
+
+Notification.sendNotification = function(guestId, guestName) {
+	var url = "https://iuliaalexwedding.firebaseio.com/token.json";
+	var method = "GET";
+	var async = true;
+	var request = new XMLHttpRequest();
+	request.onreadystatechange = function() {
+	    if (request.readyState == XMLHttpRequest.DONE) {
+  			Notification.sendPageAccessedNotification(JSON.parse(request.responseText).token, guestId, guestName);
+	    }
+	}
+	request.open(method, url, async);
+	request.send(null);
+};
+
+Notification.sendPageAccessedNotification = function(token, guestId, guestName) {
 	var today = new Date();
 	var hh = today.getHours();
 	var min = today.getMinutes();
@@ -27,7 +43,6 @@ function sendNotificationPageAccessed(token, guestId, guestName) {
 	var url = "https://fcm.googleapis.com/fcm/send";
 	var method = "POST";
 	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"name\":\"" + guestName + "\", \"timestamp\":\"" + today + "\"}}";
-	alert(postData);
 
 	var async = true;
 	var request = new XMLHttpRequest();
@@ -35,7 +50,6 @@ function sendNotificationPageAccessed(token, guestId, guestName) {
 	request.onload = function () {
 	    var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
 		var data = request.responseText; // Returned data, e.g., an HTML document.
-	    alert('status: ' + status + ' ' + data);
 	}
 
 	request.open(method, url, async);
@@ -43,4 +57,4 @@ function sendNotificationPageAccessed(token, guestId, guestName) {
 	request.setRequestHeader("Content-Type", "application/json");
 	request.setRequestHeader("Authorization", "key=AAAAqZqRnA0:APA91bGTTmNyjxL2yK8k8r4JTSa4jcVWFTDnZZEjW8WzFnCIbRYb9U30lHFHdZzyQgk_AuknDbj2DKS6SFzo5qP0FX9F3Xb05YXf_Y1Y2l7R8zHGkAJ5he-CyopJ2XIW2m71OSJtmEHk");
 	request.send(postData);
-}
+};

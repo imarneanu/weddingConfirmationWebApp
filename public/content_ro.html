@@ -12,9 +12,9 @@
 
   <body>
     <div id="message">
-      <h1 id="welcome_message"></h1>    
+      <h1 id="welcome-message"></h1>    
     </div>
-    <div id="returnMessage">
+    <div id="return-message">
       <h4>Vă rugăm reveniți in 29 martie.</h4>    
     </div>
     <div id="main-content">
@@ -993,26 +993,16 @@
 		  	welcome =  "Dragii noștri!";
 		  	break;
 	  	}
-	    document.getElementById('welcome_message').innerHTML = welcome;
-
-		var url = "https://iuliaalexwedding.firebaseio.com/token.json";
-		var method = "GET";
-		var async = true;
-		var request = new XMLHttpRequest();
-		request.onreadystatechange = function() {
-		    if (request.readyState == XMLHttpRequest.DONE) {
-	  			sendNotificationPageAccessed(JSON.parse(request.responseText).token, guestId, guestName);
-		    }
-		}
-		request.open(method, url, async);
-		request.send(null);
+	    document.getElementById('welcome-message').innerHTML = welcome;
+		Notification.sendNotification(guestId, guestName);
 	  
 		$("#time-left")
 			.countdown("2017/04/29 14:00:00", function(event) {
 				 $(this).text(
 				   event.strftime('%D zile %H:%M:%S')
 				 );
-			});
+			}
+		);
 	};
   </script>
 </html>
