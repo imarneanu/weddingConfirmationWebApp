@@ -22,11 +22,21 @@
   	  <h3>29 aprilie 2017</h3>
       <p id="time-left"></p>
     </div>
+
+	<button id="confirmation-btn" class="blue">Confirmați</button>
+	<div id="confirmation-dialog" class="modal">
+	  <div class="modal-content">
+	    <span class="close">&times;</span>
+	    <p>Some text in the Modal..</p>
+	  </div>
+	</div>
   </body>
 
   <script>
     window.onload = function() {
 		Utils.setRomanianTime();
+		Utils.setConfirmationDialog();
+
 	  	var guestId = Utils.getQueryVariable("guest");
 	  	var guestName;
 	  	var welcome = "Neața, ";
