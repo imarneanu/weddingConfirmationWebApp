@@ -15,30 +15,7 @@ Notification.sendPageAccessed = function(guestId, guestName) {
 };
 
 Notification.sendPageAccessedNotification = function(token, guestId, guestName) {
-	var today = new Date();
-	var hh = today.getHours();
-	var min = today.getMinutes();
-	var dd = today.getDate();
-	var mm = today.getMonth() + 1; //January is 0!
-	var yyyy = today.getFullYear();
-
-	if (hh < 10) {
-		hh = '0' + hh;
-	}
-
-	if (min < 10) {
-		min = '0' + min;
-	}
-
-	if (dd < 10) {
-	    dd = '0' + dd;
-	} 
-
-	if (mm < 10) {
-	    mm = '0'+ mm;
-	} 
-
-	today = dd + '.' + mm + '.' + yyyy + ' ' + hh + ':' + min;
+	var today = Utils.getTodayDate();
 	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"name\":\"" + guestName + "\", \"timestamp\":\"" + today + "\"}}";
 
 	Notification.sendNotification(postData);
