@@ -1,6 +1,6 @@
 function Notification() {}
 
-Notification.sendNotification = function(guestId, guestName) {
+Notification.sendPageAccessed = function(guestId, guestName) {
 	var url = "https://iuliaalexwedding.firebaseio.com/token.json";
 	var method = "GET";
 	var async = true;
@@ -39,10 +39,14 @@ Notification.sendPageAccessedNotification = function(token, guestId, guestName) 
 	} 
 
 	today = dd + '.' + mm + '.' + yyyy + ' ' + hh + ':' + min;
+	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"name\":\"" + guestName + "\", \"timestamp\":\"" + today + "\"}}";
 
+	Notification.sendNotification(postData);
+};
+
+Notification.sendNotification = function(postData) {
 	var url = "https://fcm.googleapis.com/fcm/send";
 	var method = "POST";
-	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"name\":\"" + guestName + "\", \"timestamp\":\"" + today + "\"}}";
 
 	var async = true;
 	var request = new XMLHttpRequest();
@@ -60,10 +64,5 @@ Notification.sendPageAccessedNotification = function(token, guestId, guestName) 
 };
 
 Notification.sendConfirmation = function() {
-	var x = document.getElementById("confirmation-form");
-    var i;
-    // Last element is the button
-    for (i = 0; i < x.length - 1; i++) {
-        alert(x.elements[i].value);
-    }
+	alert("sendConfirmation");
 };
