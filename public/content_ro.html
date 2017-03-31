@@ -27,21 +27,31 @@
 	<div id="confirmation-dialog" class="modal">
 	  <div class="modal-content">
 	    <span class="close">&times;</span>
-	    <form id="confirmation-form">
+	    <div id="confirmation-form">
 			Nume și prenume invitat: <input type="text" name="guest_name"><br>
-		  	<label id="confirmation-spouse" class="hidden">Nume și prenume invitat: <input type="text" name="spouse_name"></label><br><br>
+		  	<label id="confirmation-spouse" class="hidden">
+		  		Nume și prenume invitat: <input type="text" name="spouse_name"><br>
+		  	</label><br>
 
-			<div id="confirmation-partner-checkbox" class="hidden"><input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-partner'), this)">Doriți să confirmați ++1?<br></div>
-		  	<label id="confirmation-partner" class="hidden">Nume și prenume: <input type="text" name="partner_name"></label><br><br>
+			<div id="confirmation-partner-checkbox" class="hidden">
+				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-partner'), this)">Doriți să confirmați ++1?<br>
+			  	<label id="confirmation-partner" class="hidden">
+			  		Nume și prenume: <input type="text" name="partner_name"><br>
+			  	</label><br>
+			</div>
 
-			<div id="confirmation-accommodation-checkbox" class="hidden"><input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Aveți nevoie de cazare?<br></div>
-		  	<label id="confirmation-accommodation-period" class="hidden">Perioada (nopți): <input type="text" name="accommodation-period"></label><br><br>
+			<div id="confirmation-accommodation-checkbox" class="hidden">
+				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Aveți nevoie de cazare?<br>
+			  	<label id="confirmation-accommodation-period" class="hidden">
+			  		Perioada (nopți): <input type="text" name="accommodation-period"><br>
+			  	</label><br>
+		  	</div>
 
 			Mesaj pentru miri: <br />
-			<textarea rows="5" cols="50" name="comment">Vă rugăm lăsați aici un mesaj dacă aveți întrebări, nelămuriri sau doar vreți să salutați :)</textarea>
+			<textarea rows="5" cols="50" name="comment">Vă rugăm lăsați aici un mesaj dacă aveți întrebări, nelămuriri sau doar vreți să salutați :)</textarea><br><br>
 
-			<br><button onclick="Notification.sendConfirmation()" class="blue">Confirmați</button>
-	    </form>
+			<button onclick="Notification.sendConfirmation()" class="blue">Confirmați</button>
+	    </div>
 	  </div>
 	</div>
   </body>
@@ -54,8 +64,10 @@
 	  	var guestId = Utils.getQueryVariable("guest");
 	  	var guestName;
 	  	var welcome = "Neața, ";
+
 	  	var showSpouse = false;
-	  	alert("showAccommodation default: " + showAccommodation);
+	  	var showAccommodation;
+
 	  	switch (guestId) {
 	  	  // Barca
 		  case "costi.aliona":
