@@ -42,4 +42,5 @@ Notification.sendNotification = function(postData) {
 
 Notification.sendConfirmation = function() {
 	alert("sendConfirmation");
+	Utils.hideConfirmationDialog();
 };

@@ -88,6 +88,10 @@ Utils.setConfirmationDialog = function() {
 	}
 };
 
+Utils.hideConfirmationDialog = function() {
+	document.getElementById('confirmation-dialog').style.display = "none";
+};
+
 Utils.showInput = function(input, checkbox) {
 	if (checkbox.checked) {
 		input.style.display = "block";
