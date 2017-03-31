@@ -21,7 +21,11 @@ Notification.sendPageAccessedNotification = function(token, guestId, guestName) 
 	Notification.sendNotification(postData);
 };
 
-Notification.sendConfirmation = function() {
+Notification.sendConfirmation = function(language) {
+	if (!Notification.isConfirmationDataValid(language)) {
+		return;
+	}
+
 	var url = "https://iuliaalexwedding.firebaseio.com/token.json";
 	var method = "GET";
 	var async = true;
@@ -33,6 +37,59 @@ Notification.sendConfirmation = function() {
 	}
 	request.open(method, url, async);
 	request.send(null);
+};
+
+Notification.isConfirmationDataValid = function(language) {
+	if (document.getElementById('guest-name').value == "") {
+		switch (language) {
+			case 0:
+				alert("Please input your name!");
+				break;
+			case 1:
+				alert("Bitte Vollname hiinzufügen!");
+				break;
+			default:
+				alert("Vă rugăm să vă introduceți numele!");
+
+		}
+		return false;
+	}
+
+	if (document.getElementById('confirmation-partner').style['display'] != "none"
+		&& document.getElementById('confirmation-partner').style['display'] != ""
+		&& document.getElementById('partner-name').value == "") {
+		switch (language) {
+			case 0:
+				alert("Please input the partner name!");
+				break;
+			case 1:
+				alert("Bitte der Partener's Vollname hinzufügen!");
+				break;
+			default:
+				alert("Vă rugăm să introduceți numele invitatului!");
+
+		}
+		return false;
+	}
+
+	if (document.getElementById('confirmation-accommodation-period').style['display'] != "none"
+		&& document.getElementById('confirmation-accommodation-period').style['display'] != ""
+		&& document.getElementById('accommodation-period').value == "") {
+		switch (language) {
+			case 0:
+				alert("Please input the accommodation dates!");
+				break;
+			case 1:
+				alert("Bitte der Übernachtungen Daten hinzufügen!");
+				break;
+			default:
+				alert("Vă rugăm să introduceți nopțile pentru care aveți nevoie de cazare!");
+
+		}
+		return false;
+	}
+
+	return true;
 };
 
 Notification.sendConfirmationNotification = function(token) {

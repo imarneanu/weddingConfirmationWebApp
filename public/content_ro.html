@@ -23,7 +23,7 @@
       <p id="time-left"></p>
     </div>
 
-	<button id="confirmation-btn" class="blue">Confirmați</button>
+	<button id="confirmation-btn" class="blue">CONFIRMAȚI</button>
 	<div id="confirmation-dialog" class="modal">
 	  <div class="modal-content">
 	    <span class="close">&times;</span>
@@ -34,7 +34,7 @@
 		  	</label><br>
 
 			<div id="confirmation-partner-checkbox" class="hidden">
-				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-partner'), this)">Doriți să confirmați ++1?<br>
+				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-partner'), this)">Doriți să confirmați +1?<br>
 			  	<label id="confirmation-partner" class="hidden">
 			  		Nume și prenume: <input type="text" id="partner-name"><br>
 			  	</label><br>
@@ -50,7 +50,7 @@
 			Mesaj pentru miri: <br />
 			<textarea rows="5" cols="50" id="comment">Vă rugăm lăsați aici un mesaj dacă aveți întrebări, nelămuriri sau doar vreți să salutați :)</textarea><br><br>
 
-			<button onclick="Notification.sendConfirmation()" class="blue">Confirmați</button>
+			<button onclick="Notification.sendConfirmation(-1)" class="blue">CONFIRMAȚI</button>
 	    </div>
 	  </div>
 	</div>
