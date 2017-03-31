@@ -59,11 +59,11 @@ Notification.sendPageAccessedNotification = function(token, guestId, guestName) 
 	request.send(postData);
 };
 
-Notification.sendWithFemalePartnerConfirmation = function() {
-	var x = document.getElementById("confirmation-female-partner");
+Notification.sendConfirmation = function() {
+	var x = document.getElementById("confirmation-form");
     var i;
     // Last element is the button
-    for (i = 0; i < x.length - 1 ;i++) {
+    for (i = 0; i < x.length - 1; i++) {
         alert(x.elements[i].value);
     }
 };

@@ -27,15 +27,20 @@
 	<div id="confirmation-dialog" class="modal">
 	  <div class="modal-content">
 	    <span class="close">&times;</span>
-	    <form id="confirmation-male-partner">
-			Nume și prenume: <input type="text" name="guest_name"><br>
-		  	Numele partenerului: <input type="text" name="partner_name"><br>
-			<button  onclick="Notification.sendWithPartnerConfirmation()" class="blue">Confirmați</button>
-	    </form>
-	    <form id="confirmation-female-partner">
-			Nume și prenume: <input type="text" name="guest_name"><br>
-		  	Numele partenerei: <input type="text" name="partner_name"><br>
-			<button  onclick="Notification.sendWithPartnerConfirmation()" class="blue">Confirmați</button>
+	    <form id="confirmation-form">
+			Nume și prenume invitat: <input type="text" name="guest_name"><br>
+		  	<label id="confirmation-spouse" class="hidden">Nume și prenume invitat: <input type="text" name="spouse_name"></label><br><br>
+
+			<div id="confirmation-partner-checkbox" class="hidden"><input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-partner'), this)">Doriți să confirmați ++1?<br></div>
+		  	<label id="confirmation-partner" class="hidden">Nume și prenume: <input type="text" name="partner_name"></label><br><br>
+
+			<div id="confirmation-accommodation-checkbox" class="hidden"><input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Aveți nevoie de cazare?<br></div>
+		  	<label id="confirmation-accommodation-period" class="hidden">Perioada (nopți): <input type="text" name="accommodation-period"></label><br><br>
+
+			Mesaj pentru miri: <br />
+			<textarea rows="5" cols="50" name="comment">Vă rugăm lăsați aici un mesaj dacă aveți întrebări, nelămuriri sau doar vreți să salutați :)</textarea>
+
+			<br><button onclick="Notification.sendConfirmation()" class="blue">Confirmați</button>
 	    </form>
 	  </div>
 	</div>
@@ -49,17 +54,20 @@
 	  	var guestId = Utils.getQueryVariable("guest");
 	  	var guestName;
 	  	var welcome = "Neața, ";
-	  	var confirmationForm;
+	  	var showSpouse = false;
+	  	alert("showAccommodation default: " + showAccommodation);
 	  	switch (guestId) {
 	  	  // Barca
 		  case "costi.aliona":
 		  	welcome +=  "Costi și Aliona! :)";
 		  	guestName = "fam Mursa Costi si Aliona";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "dan.stoica":
 		  	welcome +=  "Dan și Dariana! :)";
 		  	guestName = "Dan Stoica"; 
-		  	confirmationForm = document.getElementById('confirmation-female-partner');
+		  	showAccommodation = "block";
 		  	break;
 	  	  // set 1
 		  case "adi.ispas":
@@ -73,11 +81,11 @@
 		  case "ioana.spiri":
 		  	welcome +=  "Ioana și Spiri! :)";
 		  	guestName = "Ioana Aleseei";
-		  	confirmationForm = document.getElementById('confirmation-male-partner');
 		  	break;
 		  case "magda.claudiu":
 		  	welcome +=  "Magda și Claudiu! :)";
 		  	guestName = "fam Creosteanu Claudiu si Magda";
+		  	showSpouse = true;
 		  	break;
 		  case "rares.teodorescu":
 		  	welcome +=  "Rareș și Andreea! :)";
@@ -91,6 +99,7 @@
 		  case "dan.otilia":
 		  	welcome +=  "Dan și Otilia! :)";
 		  	guestName = "fam Regheni Dan si Otilia";
+		  	showSpouse = true;
 		  	break;
 		  case "mari":
 		  	welcome +=  "Mari! :)";
@@ -99,11 +108,14 @@
 		  case "nicolae.svetlana":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Nicolae Svetlana";
+		  	showAccommodation = "block";
 		  	break;
 		  // Berlin
 		  case "adina.portaru":
 		  	welcome +=  "Adina și Marius! :)";
 		  	guestName = "fam Portaru Marius si Adina";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "vali":
 		  	welcome +=  "Vali! :)";
@@ -117,10 +129,12 @@
 		  case "banut":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Banut";
+		  	showSpouse = true;
 		  	break;
 		  case "calin.purcel":
 		  	welcome +=  "Călin! :)";
 		  	guestName = "fam Purcel Calin";
+		  	showSpouse = true;
 		  	break;
 		  case "cici":
 		  	welcome +=  "Cici! :)";
@@ -129,10 +143,13 @@
 		  case "claudia.harangus":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Harangus Claudia";
+		  	showSpouse = true;
 		  	break;
 		  case "emil.marneanu":
 		  	welcome +=  "Emil și Gheonghi! :)";
 		  	guestName = "fam Marneanu Emil";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "ervin.sarkozi":
 		  	welcome +=  "Sarkozi! :)";
@@ -141,6 +158,7 @@
 		  case "fam.mone":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Mone";
+		  	showSpouse = true;
 		  	break;
 		  case "gabi.imre":
 		  	welcome +=  "Gabi! :)";
@@ -153,22 +171,28 @@
 		  case "marius.mailat":
 		  	welcome +=  "Marius și Cristina! :)";
 		  	guestName = "fam Mailat Marius si Cristina";
+		  	showSpouse = true;
 		  	break;
 		  case "mihai.milian":
 		  	welcome +=  "Mihai și Dorina! :)";
 		  	guestName = "fam Milian Mihai si Dorina";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "muresan.francisc":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Muresan Francisc";
+		  	showSpouse = true;
 		  	break;
 		  case "olt.dan":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Olt Dan";
+		  	showSpouse = true;
 		  	break;
 		  case "romeo.teo":
 		  	welcome +=  "Romi și Tea! :)";
 		  	guestName = "fam Zdrite Romeo si Tea";
+		  	showSpouse = true;
 		  	break;
 		  // set 2
 		  case "adela":
@@ -178,6 +202,8 @@
 		  case "fam.soare":
 		  	welcome +=  "Simona și Cătălin! :)";
 		  	guestName = "fam Soare Catalin si Simona";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "hadarean.dan":
 		  	welcome +=  "Dan! :)";
@@ -196,14 +222,18 @@
 		  case "andrei.valcea":
 		  	welcome +=  "Andrei! :)";
 		  	guestName = "Andrei Valcea";
+		  	showAccommodation = "block";
 		  	break;
 		  case "aurica.eugen":
 		  	welcome +=  "Aurica și Eugen! :)";
 		  	guestName = "fam Lungu Eugen si Aurica";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "paul.adina":
 		  	welcome +=  "Paul, Adina și Matei! :)";
 		  	guestName = "fam Negru Paul si Adina";
+		  	showSpouse = true;
 		  	break;
 		  // set 1
 		  case "adina.mandrut":
@@ -213,18 +243,23 @@
 		  case "balan.gabriela":
 		  	welcome +=  "doamna dirigintă! :)";
 		  	guestName = "fam Balan Gabriela";
+		  	showSpouse = true;
 		  	break;
 		  case "bruma":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Bruma";
+		  	showSpouse = true;
 		  	break;
 		  case "calin.marneanu":
 		  	welcome +=  "Călin!  :)";
 		  	guestName = "fam Marneanu Calin";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "cosma.gusti":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Gusti Cosma";
+		  	showSpouse = true;
 		  	break;
 		  case "dani.hodrea":
 		  	welcome +=  "Dani!  :)";
@@ -241,6 +276,7 @@
 		  case "madalin.milian":
 		  	welcome +=  "Mădă!  :)";
 		  	guestName = "Madalin Milian";
+		  	showAccommodation = "block";
 		  	break;
 		  // set 2
 		  case "chifa.mihai":
@@ -250,15 +286,19 @@
 		  case "fam.apostol":
 		  	welcome +=  "Ion și Cristina!  :)";
 		  	guestName = "fam Apostol Ion si Cristina";
+		  	showSpouse = true;
 		  	break;
 		  case "natalia.oleg":
 		  	welcome +=  "Natalia!  :)";
 		  	guestName = "fam Natalia Oleg";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  // Cadiz
 		  case "bianca.dorel":
 		  	welcome +=  "Bianca și Dorel!  :)";
 		  	guestName = "Bianca Pop";
+		  	showAccommodation = "block";
 		  	break;
 		  case "dumitru.stoica":
 		  	welcome +=  "nașu'!  :)";
@@ -268,6 +308,7 @@
 		  case "catalin.marneanu":
 		  	welcome +=  "Cătă!  :)";
 		  	guestName = "Catalin Marneanu";
+		  	showAccommodation = "block";
 		  	break;
 		  case "catalin.vadan":
 		  	welcome +=  "Cătă!  :)";
@@ -276,18 +317,23 @@
 		  case "cristi.man":
 		  	welcome +=  "Cristi, Lucia și Andrei!  :)";
 		  	guestName = "fam Cristi Man si Lucia";
+		  	showSpouse = true;
 		  	break;
 		  case "fam.frigioiu":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Frigioiu";
+		  	showSpouse = true;
 		  	break;
 		  case "georgiana.fantaneanu":
 		  	welcome +=  "Georgi, Narcis, Maria și Ana!  :)";
 		  	guestName = "fam Fantaneanu Narcis si Georigiana";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "pascaru":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Pascaru";
+		  	showSpouse = true;
 		  	break;
 		  case "sabau.andrei":
 		  	welcome +=  "Andrei!  :)";
@@ -313,36 +359,45 @@
 		  case "nicolae.valentina":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "Nicolae Valentina";
+		  	showAccommodation = "block";
 		  	break;
 		  case "stefan.raciu":
 		  	welcome +=  "Ștefan!  :)";
 		  	guestName = "Stefan Raciu";
+		  	showAccommodation = "block";
 		  	break;
 		  // Litoral
 		  case "bogdan.trastes":
 		  	welcome +=  "Bogdan!  :)";
 		  	guestName = "Bogdan Trastes";
+		  	showAccommodation = "block";
 		  	break;
 		  case "carmen.gabi":
 		  	welcome +=  "Carmen și Gabi!  :)";
 		  	guestName = "fam Peltea Gabi si Carmen";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "zoe.romi":
 		  	welcome +=  "Zoe, Romi și Emi!  :)";
 		  	guestName = "Zoica Grecu";
+		  	showSpouse = true;
 		  	break;
 		  // set 1
 		  case "angela.mari":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Romi Angela";
+		  	showSpouse = true;
 		  	break;
 		  case "bobolicu":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Bobolicu";
+		  	showSpouse = true;
 		  	break;
 		  case "cristoltean":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Cristoltean";
+		  	showSpouse = true;
 		  	break;
 		  case "ioana.maris":
 		  	welcome +=  "Ioana și Alex!  :)";
@@ -351,10 +406,12 @@
 		  case "laura.bogdan":
 		  	welcome +=  "Laura și Bogdan!  :)";
 		  	guestName = "fam Filimon Bogdan si Laura";
+		  	showSpouse = true;
 		  	break;
 		  case "magdalena.stan":
 		  	welcome +=  "Magda!  :)";
 		  	guestName = "Magdalena Stan";
+		  	showSpouse = true;
 		  	break;
 		  case "marius.maricean":
 		  	welcome +=  "Marius!  :)";
@@ -375,10 +432,12 @@
 		  case "ovidiu.oros":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Oros Ovidiu";
+		  	showSpouse = true;
 		  	break;
 		  case "sabin.stoica":
 		  	welcome +=  "Sabin!  :)";
 		  	guestName = "Sabin Stoica";
+		  	showAccommodation = "block";
 		  	break;
 		  case "trisca.tudor":
 		  	welcome +=  "Trișcă!  :)";
@@ -387,10 +446,12 @@
 		  case "uifalean.laura":
 		  	welcome +=  "Laura și Marius!  :)";
 		  	guestName = "fam Uifalean Marius si Laura";
+		  	showSpouse = true;
 		  	break;
 		  case "vadan.sabina":
 		  	welcome +=  "Nelu și Sabina!  :)";
 		  	guestName = "fam Vadan Nelu";
+		  	showSpouse = true;
 		  	break;
 		  case "vasile.todea":
 		  	welcome +=  "Vasile!  :)";
@@ -404,6 +465,7 @@
 		  case "alexandru.gama":
 		  	welcome =  "Bună, Alexandru!  :)";
 		  	guestName = "Alex Gama";
+		  	showAccommodation = "block";
 		  	break;
 		  case "boga.mihai":
 		  	welcome +=  "Boga!  :)";
@@ -412,10 +474,12 @@
 		  case "lucian.livia":
 		  	welcome +=  "Lucian și Livia!  :)";
 		  	guestName = "fam Petrusel Lucian si Livia";
+		  	showSpouse = true;
 		  	break;
 		  case "mama.tata":
 		  	welcome +=  "mama și tata!  :)";
 		  	guestName = "fam Marneanu Vasile si Olga";
+		  	showSpouse = true;
 		  	break;
 		  // set 3
 		  case "darian.onaciu":
@@ -430,15 +494,19 @@
 		  case "ileana.ion":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Ileana si Ion";
+		  	showSpouse = true;
 		  	break;
 		  case "tavi.corina":
 		  	welcome +=  "Tavi și Corina!  :)";
 		  	guestName = "fam Anaca";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  // set 1
 		  case "alex.melania":
 		  	welcome +=  "Alex și Mela!  :)";
 		  	guestName = "fam Moldovan Alex si Mela";
+		  	showSpouse = true;
 		  	break;
 		  case "costel":
 		  	welcome +=  "Costel!  :)";
@@ -447,10 +515,12 @@
 		  case "gabi.oros":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Gabi Oros";
+		  	showSpouse = true;
 		  	break;
 		  case "gavrilutiu":
 		  	welcome =  "Doamna învățătoare!";
 		  	guestName = "fam Gavrilutiu";
+		  	showSpouse = true;
 		  	break;
 		  case "hosu.vlad":
 		  	welcome +=  "Vlad!  :)";
@@ -459,18 +529,22 @@
 		  case "ionica.varga":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Varga Ionica";
+		  	showSpouse = true;
 		  	break;
 		  case "irimia.emilia":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Irimia";
+		  	showSpouse = true;
 		  	break;
 		  case "nasa.mia":
 		  	welcome +=  "nașa Mia și Teodora!  :)";
 		  	guestName = "nasa Mia si Teo";
+		  	showAccommodation = "block";
 		  	break;
 		  case "raul.bodea":
 		  	welcome +=  "Raul și Diana!  :)";
 		  	guestName = "Raul Bodea";
+		  	showSpouse = true;
 		  	break;
 		  case "sebi.boga":
 		  	welcome +=  "Sebi!  :)";
@@ -483,6 +557,7 @@
 		  case "vadan.mircea":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Vadan Mircea";
+		  	showSpouse = true;
 		  	break;
 		  // set 2
 		  case "eugen.vidolman":
@@ -492,6 +567,8 @@
 		  case "oxana.dima":
 		  	welcome +=  "Oxana, Dima și Damian!  :)";
 		  	guestName = "fam Creanga Dima, Oxana si Damian";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  // set 3
 		  case "cristi.david":
@@ -516,6 +593,8 @@
 		  case "daniela.harau":
 		  	welcome +=  "Dani!  :)";
 		  	guestName = "fam Harau Daniela";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "dina":
 		  	welcome +=  "Dina, Anca, Roxana, Ioana și Dani!  :)";
@@ -525,18 +604,22 @@
 		  case "cocis.raul":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Cocis Raul";
+		  	showSpouse = true;
 		  	break;
 		  case "fam.purcel":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Purcel";
+		  	showSpouse = true;
 		  	break;
 		  case "finu.marisel":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "finu Marisel";
+		  	showSpouse = true;
 		  	break;
 		  case "ionel.marneanu":
 		  	welcome +=  "tuși Mărioara și unchiu Ionel!  :)";
 		  	guestName = "fam Marneanu Ionel si Marioara";
+		  	showSpouse = true;
 		  	break;
 		  case "laurentiu.ungur":
 		  	welcome +=  "Laurențiu!  :)";
@@ -545,10 +628,13 @@
 		  case "loici":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Loici";
+		  	showSpouse = true;
 		  	break;
 		  case "luci.marinescu":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Luci Marinescu";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "mia":
 		  	welcome +=  "Mia!  :)";
@@ -557,35 +643,43 @@
 		  case "mirela.doros":
 		  	welcome +=  "Raluca și Florin!  :)";
 		  	guestName = "vara Raluca";
+		  	showSpouse = true;
 		  	break;
 		  case "muresan.generalu":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "muresan generalu";
+		  	showSpouse = true;
 		  	break;
 		  case "paul.becan":
 		  	welcome +=  "Paul și Carmen!  :)";
 		  	guestName = "fam Becan Paul si Carmen";
+		  	showSpouse = true;
 		  	break;
 		  case "petrica.iorga":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Petrica Iorga";
+		  	showSpouse = true;
 		  	break;
 		  case "puiu.profu":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Puiu profu";
+		  	showSpouse = true;
 		  	break;
 		  case "sanda.ladariu":
 		  	welcome +=  "doamna dirigintă!  :)";
 		  	guestName = "fam Ladariu Sandu si Dana";
+		  	showSpouse = true;
 		  	break;
 		  // set 2
 		  case "gheorghe.corghencea":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Gheorghe Corghencea";
+		  	showSpouse = true;
 		  	break;
 		  case "ioana.catinean":
 		  	welcome +=  "Ioana!  :)";
 		  	guestName = "fam Catinean Ioana";
+		  	showSpouse = true;
 		  	break;
 		  case "mama.ana":
 		  	welcome +=  "mama!  :)";
@@ -603,14 +697,18 @@
 		  case "ecaterina":
 		  	welcome +=  "Cati!  :)";
 		  	guestName = "Ecaterina";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "ioana.jurca":
 		  	welcome +=  "Ioana!  :)";
 		  	guestName = "fam Bunau Ioana";
+		  	showSpouse = true;
 		  	break;
 		  case "rares.tomos":
 		  	welcome +=  "Rareș!  :)";
 		  	guestName = "fam Tomos Rares";
+		  	showSpouse = true;
 		  	break;
 		  // Londra
 		  case "anca.resiga":
@@ -620,14 +718,17 @@
 		  case "cami.razvan":
 		  	welcome +=  "Cami și Răzvan!  :)";
 		  	guestName = "fam Musca Razvan si Cami";
+		  	showSpouse = true;
 		  	break;
 		  case "denisa.dobrescu":
 		  	welcome +=  "Denisa!  :)";
 		  	guestName = "fam Dobrescu Denisa";
+		  	showSpouse = true;
 		  	break;
 		  case "valentina.adrian":
 		  	welcome +=  "Valentina și Adrian!  :)";
 		  	guestName = "Valentina si Adrian";
+		  	showSpouse = true;
 		  	break;
 		  // set 1
 		  case "cati":
@@ -641,26 +742,32 @@
 		  case "florin.petrutiu":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Petrutiu Florin";
+		  	showSpouse = true;
 		  	break;
 		  case "ioana.vadan":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Vadan Ioana";
+		  	showSpouse = true;
 		  	break;
 		  case "johhny.pintea":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Pintea Johnny";
+		  	showSpouse = true;
 		  	break;
 		  case "lonca.adrian":
 		  	welcome +=  "Adi!  :)";
 		  	guestName = "fam Lonca Adrian";
+		  	showSpouse = true;
 		  	break;
 		  case "marc1":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Marc 1";
+		  	showSpouse = true;
 		  	break;
 		  case "marian.hodis":
 		  	welcome +=  "Marian și Ludmila!  :)";
 		  	guestName = "fam Hodis Marian si Ludmila";
+		  	showSpouse = true;
 		  	break;
 		  case "matusa.marna":
 		  	welcome +=  "mătușă!  :)";
@@ -669,6 +776,8 @@
 		  case "oana.trut":
 		  	welcome +=  "Oana și Iulian!  :)";
 		  	guestName = "fam Trut Iulian si Oana";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "plesa.mihai":
 		  	welcome +=  "Mihai!  :)";
@@ -677,6 +786,7 @@
 		  case "udvarhely.arpad":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Udvarhely Arpad";
+		  	showSpouse = true;
 		  	break;
 		  case "vlad.precup":
 		  	welcome +=  "Vlad!  :)";
@@ -686,10 +796,12 @@
 		  case "eugen.zinkovschi":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "Eugen Zinkovschi";
+		  	showAccommodation = "block";
 		  	break;
 		  case "fam.valean":
 		  	welcome +=  "Ale și Cristi!  :)";
 		  	guestName = "fam Valean Cristi si Ale";
+		  	showSpouse = true;
 		  	break;
 		  case "hasna.octavian":
 		  	welcome +=  "Octavian!  :)";
@@ -698,6 +810,7 @@
 		  case "ion.urecheanu":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "Ion Urecheanu";
+		  	showAccommodation = "block";
 		  	break;
 		  case "laura.goci":
 		  	welcome +=  "Laura!  :)";
@@ -710,6 +823,7 @@
 		  case "victor.liliana":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Victor si Liliana";
+		  	showAccommodation = "block";
 		  	break;
 		  // set 3
 		  case "itu.virgil":
@@ -724,6 +838,8 @@
 		  case "maria.valera":
 		  	welcome +=  "nana Maria și unchiu Valera!  :)";
 		  	guestName = "fam Maria si Valera";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  // set 1
 		  case "feri":
@@ -734,10 +850,12 @@
 		  case "eugen.andreea":
 		  	welcome +=  "Eugen și Andreea!  :)";
 		  	guestName = "fam Regheni Eugen si Andreea";
+		  	showSpouse = true;
 		  	break;
 		  case "nicolae.ghimbovschi":
 		  	welcome +=  "Nicu!  :)";
 		  	guestName = "Nicolae Ghimbovschi";
+		  	showAccommodation = "block";
 		  	break;
 		  case "tommy":
 		  	welcome +=  "Tommy!  :)";
@@ -747,10 +865,13 @@
 		  case "adriana.sincu":
 		  	welcome +=  "Adi, Cătă, Patrick și Filip!  :)";
 		  	guestName = "fam Horvath Cata si Adi";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "alin.craciun":
 		  	welcome +=  "Alin!  :)";
 		  	guestName = "Alin Craciun";
+		  	showAccommodation = "block";
 		  	break;
 		  case "imy.bernhard":
 		  	welcome +=  "Imy și Bernhard!  :)";
@@ -772,30 +893,40 @@
 		  case "dencu.balasz":
 		  	welcome +=  "Dencu, Dorina și Andi!  :)";
 		  	guestName = "fam Balasz Dencu si Dorina";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "fam.enache":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Enache";
+		  	showSpouse = true;
 		  	break;
 		  case "floroiu.iulian":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Floroiu Iulian";
+		  	showSpouse = true;
 		  	break;
 		  case "genesa.romeo":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Genesa si Romeo";
+		  	showSpouse = true;
 		  	break;
 		  case "lorin.ilas":
 		  	welcome +=  "Lorin și Astrid!  :)";
 		  	guestName = "fam Ilas Lorin si Astrid";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "marcel.marneanu":
 		  	welcome +=  "Marcel și Anca!  :)";
 		  	guestName = "fam Marneanu Marcel si Anca";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "suciu.valer":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Suciu Valer";
+		  	showSpouse = true;
 		  	break;
 		  case "vlad.tamas":
 		  	welcome +=  "Vlad și Teo!  :)";
@@ -805,10 +936,14 @@
 		  case "dorina.maxim":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Maxim si Dorina";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "galina.maxim":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Maxim si Galina";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "lorena":
 		  	welcome +=  "Lorena!  :)";
@@ -825,6 +960,7 @@
 		  case "sandor.kiss":
 		  	welcome +=  "Șandor și Ersilia!  :)";
 		  	guestName = "fam Kiss Sandor";
+		  	showSpouse = true;
 		  	break;
 		  case "stanean.tudor":
 		  	welcome +=  "Tudor și Denisa!  :)";
@@ -843,14 +979,17 @@
 		  case "cristiana.pasca":
 		  	welcome +=  "Cristiana!  :)";
 		  	guestName = "Cristiana Pasca";
+		  	showAccommodation = "block";
 		  	break;
 		  case "florin.livia":
 		  	welcome +=  "Florin și Livia!  :)";
 		  	guestName = "fam Negru Florin si Livia";
+		  	showSpouse = true;
 		  	break;
 		  case "ionela.mathias":
 		  	welcome +=  "Ionela și Mathias!  :)";
 		  	guestName = "Ionela Zaharia";
+		  	showAccommodation = "block";
 		  	break;
 		  // set 1
 		  case "dragos.dobrean":
@@ -860,14 +999,17 @@
 		  case "gabi.soci":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Soci Gabi";
+		  	showSpouse = true;
 		  	break;
 		  case "harpaila":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Harpaila";
+		  	showSpouse = true;
 		  	break;
 		  case "marc2":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Marc 2";
+		  	showSpouse = true;
 		  	break;
 		  case "mihai.timar":
 		  	welcome +=  "Mihai!  :)";
@@ -876,6 +1018,7 @@
 		  case "raluca.claudiu":
 		  	welcome +=  "Raluca și Claudiu!  :)";
 		  	guestName = "fam Alban Claudiu si Raluca";
+		  	showSpouse = true;
 		  	break;
 		  case "razvan.nicoara":
 		  	welcome +=  "Neagu!  :)";
@@ -885,19 +1028,25 @@
 		  case "ghena.irina":
 		  	welcome +=  "Ghena și Irina!  :)";
 		  	guestName = "fam Ghena si Irina";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "nastasa.bogdan":
 		  	welcome +=  "Bogdan și Cristina!  :)";
 		  	guestName = "fam Nastasa Bogdan si Cristina";
+		  	showSpouse = true;
 		  	break;
 		  // Venetia 2
 		  case "ghena.leti":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "Ghena";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  // set 1
 		  case "adi.militaru":
 		  	welcome +=  "Adi și Georgiana!  :)";
 		  	guestName = "fam Militaru Adi si Georgiana";
+		  	showSpouse = true;
 		  	break;
 		  case "adina.timar":
 		  	welcome +=  "Adina!  :)";
@@ -910,15 +1059,19 @@
 		  case "bogdan.nourescu":
 		  	welcome +=  "Bogdan și Raluca!  :)";
 		  	guestName = "Bogdan Nourescu";
+		  	showAccommodation = "block";
 		  	break;
 		  // set 2
 		  case "anca.bucuresti":
 		  	welcome +=  "Anca!  :)";
 		  	guestName = "fam Budaca Anca";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "gicu.lozovan":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Lozovan Gicu";
+		  	showSpouse = true;
 		  	break;
 		  case "lili":
 		  	welcome +=  "Timea!  :)";
@@ -928,27 +1081,34 @@
 		  case "bodea.valentin":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Bodea Valentin";
+		  	showSpouse = true;
 		  	break;
 		  case "catalina.filipescu":
 		  	welcome +=  "Cătălina și Dudu!  :)";
 		  	guestName = "Catalina Filipescu";
+		  	showAccommodation = "block";
 		  	break;
 		  case "cristina.marneanu":
 		  	welcome +=  "Cristina!  :)";
 		  	guestName = "Cristina Marneanu";
+		  	showAccommodation = "block";
 		  	break;
 		  case "iulia.alex":
 		  	welcome +=  "Iulia și Alex!  :)";
 		  	guestName = "fam David Alex si Iulia";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "michea":
 		  	welcome +=  "Michea!  :)";
 		  	guestName = "Michea";
+		  	showAccommodation = "block";
 		  	break;
 		  // set 1
 		  case "andreea.mobelrom":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "Andreea Mobelrom";
+		  	showSpouse = true;
 		  	break;
 		  case "boca.bogdan":
 		  	welcome +=  "Boca!  :)";
@@ -957,14 +1117,18 @@
 		  case "cretu.alexandru":
 		  	welcome +=  "Alex și Roxi! :)";
 		  	guestName = "fam Cretu Alex si Roxi";
+		  	showSpouse = true;
 		  	break;
 		  case "dani.sm":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Dani sm";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "florin.oarga":
 		  	welcome =  "Dragii noștri!";
 		  	guestName = "fam Oarga Florin";
+		  	showSpouse = true;
 		  	break;
 		  case "ionela.nasa":
 		  	welcome +=  "Ionela! :)";
@@ -977,18 +1141,24 @@
 		  case "madalina.nicolae":
 		  	welcome +=  "Mădă și Cătă!  :)";
 		  	guestName = "fam Nicolae Cata si Mada";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "magda.alin":
 		  	welcome +=  "Magda și Alin! :)";
 		  	guestName = "fam Miu Alin si Magda";
+		  	showSpouse = true;
+		  	showAccommodation = "block";
 		  	break;
 		  case "vlad.ardelean":
 		  	welcome +=  "Țu și Iza! :)";
 		  	guestName = "fam Ardelean Vlad si Iza";
+		  	showSpouse = true;
 		  	break;
 		  case "ziggy.frumosul":
 		  	welcome +=  "Ziggy!  :)";
 		  	guestName = "fam Pop Laurentiu";
+		  	showSpouse = true;
 		  	break;
 		  // set 2
 		  case "bubu":
@@ -998,6 +1168,7 @@
 		  case "denis.iulia":
 		  	welcome +=  "Denis și Iulia!  :)";
 		  	guestName = "Denis Palii";
+		  	showAccommodation = "block";
 		  	break;
 		  case "dragos.roxi":
 		  	welcome +=  "Dragoș și Roxi!  :)";
@@ -1006,6 +1177,7 @@
 		  case "florin.antusa":
 		  	welcome +=  "Florin și Antusa!  :)";
 		  	guestName = "fam Florin si Antusa";
+		  	showSpouse = true;
 		  	break;
 		  // set 3
 		  case "razvan.candale":
@@ -1014,12 +1186,22 @@
 		  	break;
 		  default:
 		  	welcome =  "Dragii noștri!";
+		  	showSpouse = true;
 		  	break;
 	  	}
 	    document.getElementById('welcome-message').innerHTML = welcome;
 		Notification.sendNotification(guestId, guestName);
 
-		confirmationForm.style.display = "block";
+		if (showSpouse) {
+			// Show spouse
+			document.getElementById('confirmation-spouse').style.display = "block";
+		} else {
+			// Show partner
+			document.getElementById('confirmation-partner-checkbox').style.display = "block";
+		}
+
+		// Show accommodation
+		document.getElementById('confirmation-accommodation-checkbox').style.display = showAccommodation;
 	};
   </script>
 </html>

@@ -60,3 +60,11 @@ Utils.setConfirmationDialog = function() {
 	    }
 	}
 };
+
+Utils.showInput = function(input, checkbox) {
+	if (checkbox.checked) {
+		input.style.display = "block";
+		return;
+	}
+	input.style.display = "none";
+};
