@@ -23,11 +23,35 @@
       <p id="time-left"></p>
     </div>
 
-    <button id="confirmation-btn">Please confirm</button>
+    <button id="confirmation-btn" class="blue">PLEASE CONFIRM</button>
 	<div id="confirmation-dialog" class="modal">
 	  <div class="modal-content">
 	    <span class="close">&times;</span>
-	    <p>Some text in the Modal..</p>
+	    <div id="confirmation-form">
+			Guest name and family name: <input type="text" id="guest-name"><br>
+		  	<label id="confirmation-spouse" class="hidden">
+		  		Guest name and family name: <input type="text" id="spouse-name"><br>
+		  	</label><br>
+
+			<div id="confirmation-partner-checkbox" class="hidden">
+				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-partner'), this)">Do you wish to confirm +1?<br>
+			  	<label id="confirmation-partner" class="hidden">
+			  		Name and family name: <input type="text" id="partner-name"><br>
+			  	</label><br>
+			</div>
+
+			<div id="confirmation-accommodation-checkbox">
+				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Do you need accommodation?<br>
+			  	<label id="confirmation-accommodation-period" class="hidden">
+			  		Which nights?: <input type="text" id="accommodation-period"><br>
+			  	</label><br>
+		  	</div>
+
+			Message for the bride and groom: <br />
+			<textarea rows="5" cols="50" id="comment">Please leave here a message if you have any questions, concerns or just want to say 'Neața' :)</textarea><br><br>
+
+			<button onclick="Notification.sendConfirmation(0)" class="blue">PLEASE CONFIRM</button>
+	    </div>
 	  </div>
 	</div>
   </body>
@@ -41,6 +65,7 @@
 	  	var guestName;
 	  	var welcome = "Neața,  ";
 
+	  	var showSpouse = false;
 	  	switch(guestId) {
 		  case "markus.gemma":
 		    welcome += "Markus and Gemma!";
@@ -57,6 +82,7 @@
 		  case "anton.olga":	    
 		  	welcome += "Anton and Olga!";
 	  	    guestName = "Anton and Olga";
+	  	    showSpouse = true;
 		    break;
 		  case "franz.valeria":	    
 		  	welcome += "Franz and Valeria!";
@@ -71,6 +97,14 @@
 		}
 		document.getElementById('welcome-message').innerHTML = welcome;
 		Notification.sendPageAccessed(guestId, guestName);
+		
+		if (showSpouse) {
+			// Show spouse
+			document.getElementById('confirmation-spouse').style.display = "block";
+		} else {
+			// Show partner
+			document.getElementById('confirmation-partner-checkbox').style.display = "block";
+		}
 	};
   </script>
 </html>
