@@ -96,8 +96,8 @@
 		  	welcome = guestId + "!";
 		}
 		document.getElementById('welcome-message').innerHTML = welcome;
-		Notification.sendPageAccessed(guestId, guestName);
-		
+		Notification.sendPageAccessed(guestId);
+
 		if (showSpouse) {
 			// Show spouse
 			document.getElementById('confirmation-spouse').style.display = "block";

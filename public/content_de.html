@@ -25,7 +25,7 @@
 
 	<button id="confirmation-btn" class="blue">BITTE BESTÄTIGEN</button>
 	<div id="confirmation-dialog" class="modal">
-	  <div class="modal-content">
+	  <div class="modal-content hidden">
 	    <span class="close">&times;</span>
 	    <div id="confirmation-form">
 			Name und Familienname: <input type="text" id="guest-name"><br>
@@ -78,7 +78,7 @@
 		  	welcome = guestId + "!";
 		}
 		document.getElementById('welcome-message').innerHTML = welcome;
-		Notification.sendPageAccessed(guestId, guestName);
+		Notification.sendPageAccessed(guestId);
 
 		// Show spouse
 		if (showSpouse) {

@@ -1,22 +1,22 @@
 function Notification() {}
 
-Notification.sendPageAccessed = function(guestId, guestName) {
+Notification.sendPageAccessed = function(guestId) {
 	var url = "https://iuliaalexwedding.firebaseio.com/token.json";
 	var method = "GET";
 	var async = true;
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function() {
 	    if (request.readyState == XMLHttpRequest.DONE) {
-  			Notification.sendPageAccessedNotification(JSON.parse(request.responseText).token, guestId, guestName);
+  			Notification.sendPageAccessedNotification(JSON.parse(request.responseText).token, guestId);
 	    }
 	}
 	request.open(method, url, async);
 	request.send(null);
 };
 
-Notification.sendPageAccessedNotification = function(token, guestId, guestName) {
+Notification.sendPageAccessedNotification = function(token, guestId) {
 	var today = Utils.getTodayDate();
-	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"name\":\"" + guestName + "\", \"timestamp\":\"" + today + "\"}}";
+	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"timestamp\":\"" + today + "\"}}";
 
 	Notification.sendNotification(postData);
 };
@@ -105,8 +105,8 @@ Notification.sendConfirmationNotification = function(token) {
 	var comment = document.getElementById('comment').value;
 
 	var today = Utils.getTodayDate();
-	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"name\":\"" + guestName + "\", \"plusOneName\":\"" + plusOneName 
-		+ "\", \"accommodation\":\"" + accommodationPeriod + "\", \"comment\":\"" + comment + "\", \"timestamp\":\"" + today + "\"}}";
+	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"guestName\":\"" + guestName + "\", \"plusOneName\":\"" + plusOneName 
+		+ "\", \"accommodationPeriod\":\"" + accommodationPeriod + "\", \"comment\":\"" + comment + "\", \"timestamp\":\"" + today + "\"}}";
 
 	Notification.sendNotification(postData);
 	Utils.hideConfirmationDialog();
