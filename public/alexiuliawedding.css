@@ -45,10 +45,6 @@ body {
   margin: 0 0 16px;
 }
 
-#return-message h4 {
-  text-align: center;
-}
-
 button {
   display: inline-block;
   zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
