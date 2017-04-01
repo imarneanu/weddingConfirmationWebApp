@@ -121,11 +121,14 @@ Notification.sendConfirmationNotification = function(token) {
 		plusOneName = partnerName;
 	}
 	var accommodationPeriod = document.getElementById('accommodation-period').value;
+	var confirmChurch = document.getElementById('confirm-church').checked;
+	var confirmOnlyChurch = document.getElementById('confirm-only-church').checked;
 	var comment = document.getElementById('comment').value;
 
 	var today = Utils.getTodayDate();
-	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"guestName\":\"" + guestName + "\", \"attend\":" + true + ", \"plusOneName\":\"" + plusOneName 
-		+ "\", \"accommodationPeriod\":\"" + accommodationPeriod + "\", \"comment\":\"" + comment + "\", \"timestamp\":\"" + today + "\"}}";
+	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"guestName\":\"" + guestName + "\", \"attend\":" + true + ", \"attendChurch\":" 
+		+ confirmChurch + ", \"attendOnlyChurch\":" + confirmOnlyChurch + ", \"plusOneName\":\"" + plusOneName + "\", \"accommodationPeriod\":\"" + accommodationPeriod 
+		+ "\", \"comment\":\"" + comment + "\", \"timestamp\":\"" + today + "\"}}";
 
 	Notification.sendNotification(postData);
 	Utils.hideConfirmationDialog();
