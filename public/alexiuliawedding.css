@@ -47,8 +47,6 @@ body {
 
 button {
   display: inline-block;
-  zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
-  *display: inline;
   vertical-align: baseline;
   margin: 0 2px;
   outline: none;
@@ -112,7 +110,20 @@ button {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 40%;  /*Could be more or less, depending on screen size*/ 
+    height: 35%;
+    width: 27%;  /*Could be more or less, depending on screen size*/ 
+}
+
+.modal-confirmation-btn {
+    width: 45%;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
 }
 
 .close {

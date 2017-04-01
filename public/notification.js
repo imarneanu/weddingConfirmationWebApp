@@ -21,8 +21,8 @@ Notification.sendPageAccessedNotification = function(token, guestId) {
 	Notification.sendNotification(postData);
 };
 
-Notification.sendConfirmation = function(language) {
-	if (!Notification.isConfirmationDataValid(language)) {
+Notification.sendConfirmation = function(language, attend) {
+	if (!Notification.isConfirmationDataValid(language, attend)) {
 		return;
 	}
 
@@ -32,14 +32,18 @@ Notification.sendConfirmation = function(language) {
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = function() {
 	    if (request.readyState == XMLHttpRequest.DONE) {
-  			Notification.sendConfirmationNotification(JSON.parse(request.responseText).token);
+	    	if (attend) {
+  				Notification.sendConfirmationNotification(JSON.parse(request.responseText).token);
+  				return;
+  			}
+  			Notification.sendNoConfirmationNotification(JSON.parse(request.responseText).token);
 	    }
 	}
 	request.open(method, url, async);
 	request.send(null);
 };
 
-Notification.isConfirmationDataValid = function(language) {
+Notification.isConfirmationDataValid = function(language, attend) {
 	if (document.getElementById('guest-name').value == "") {
 		switch (language) {
 			case 0:
@@ -53,6 +57,10 @@ Notification.isConfirmationDataValid = function(language) {
 
 		}
 		return false;
+	}
+
+	if (!attend) {
+		return true;
 	}
 
 	if (document.getElementById('confirmation-partner').style['display'] != "none"
@@ -92,6 +100,17 @@ Notification.isConfirmationDataValid = function(language) {
 	return true;
 };
 
+Notification.sendNoConfirmationNotification = function(token) {
+	var guestId = Utils.getQueryVariable("guest");
+	var guestName = document.getElementById('guest-name').value;
+
+	var today = Utils.getTodayDate();
+	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"guestName\":\"" + guestName + "\", \"attend\":" + false + ", \"timestamp\":\"" + today + "\"}}";
+
+	Notification.sendNotification(postData);
+	Utils.hideConfirmationDialog();
+};
+
 Notification.sendConfirmationNotification = function(token) {
 	var guestId = Utils.getQueryVariable("guest");
 	var guestName = document.getElementById('guest-name').value;
@@ -105,7 +124,7 @@ Notification.sendConfirmationNotification = function(token) {
 	var comment = document.getElementById('comment').value;
 
 	var today = Utils.getTodayDate();
-	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"guestName\":\"" + guestName + "\", \"plusOneName\":\"" + plusOneName 
+	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"guestName\":\"" + guestName + "\", \"attend\":" + true + ", \"plusOneName\":\"" + plusOneName 
 		+ "\", \"accommodationPeriod\":\"" + accommodationPeriod + "\", \"comment\":\"" + comment + "\", \"timestamp\":\"" + today + "\"}}";
 
 	Notification.sendNotification(postData);
