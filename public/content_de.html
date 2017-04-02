@@ -39,12 +39,14 @@
 
 			<div id="confirmation-accommodation-checkbox">
 				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Möchten sie übernachten?<br>
-			  	<label id="confirmation-accommodation-period" class="hidden">
-			  		Bitte Übernachtungen Daten hinzufügen: <input type="text" id="accommodation-period"><br>
-			  	</label><br>
+			  	<div id="confirmation-accommodation-period" class="hidden">
+			  		Ankunftsdatum: <input type="text" id="accommodation-start"><br>
+			  		Abreisedatum: <input type="text" id="accommodation-end"><br>
+			  	</div><br>
 		  	</div>
 
 			<input type="checkbox" id="confirm-church" value="off">Kommen auch zur Kirche.<br><br>
+			<input type="checkbox" id="confirm-only-church" value="off" class="hidden">Kommen nur zur Kirche.<br><br>
 
 			Nachricht für die Braut und Bräutigam: <br />
 			<textarea rows="5" cols="50" id="comment">Bitte hinterlassen Sie hier eine Nachricht, wenn Sie Fragen haben, Anliegen oder einfach nur 'Neața' :) sagen wollen

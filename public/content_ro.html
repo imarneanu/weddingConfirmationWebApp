@@ -39,9 +39,10 @@
 
 			<div id="confirmation-accommodation-checkbox" class="hidden">
 				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Aveți nevoie de cazare?<br>
-			  	<label id="confirmation-accommodation-period" class="hidden">
-			  		Perioada (nopți): <input type="text" id="accommodation-period"><br>
-			  	</label><br>
+			  	<div id="confirmation-accommodation-period" class="hidden">
+			  		Data sosirii: <input type="text" id="accommodation-start"><br>
+			  		Data plecării: <input type="text" id="accommodation-end"><br>
+			  	</div><br>
 		  	</div>
 
 			<input type="checkbox" id="confirm-church" value="off">Venim și la cununia religioasă.<br>

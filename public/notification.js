@@ -82,7 +82,8 @@ Notification.isConfirmationDataValid = function(language, attend) {
 
 	if (document.getElementById('confirmation-accommodation-period').style['display'] != "none"
 		&& document.getElementById('confirmation-accommodation-period').style['display'] != ""
-		&& document.getElementById('accommodation-period').value == "") {
+		&& document.getElementById('accommodation-start').value == ""
+		&& document.getElementById('accommodation-end').value == "") {
 		switch (language) {
 			case 0:
 				alert("Please input the accommodation dates!");
@@ -120,15 +121,16 @@ Notification.sendConfirmationNotification = function(token) {
 	if (spouseName == "") {
 		plusOneName = partnerName;
 	}
-	var accommodationPeriod = document.getElementById('accommodation-period').value;
+	var accommodationStart = document.getElementById('accommodation-start').value;
+	var accommodationEnd = document.getElementById('accommodation-end').value;
 	var confirmChurch = document.getElementById('confirm-church').checked;
 	var confirmOnlyChurch = document.getElementById('confirm-only-church').checked;
 	var comment = document.getElementById('comment').value;
 
 	var today = Utils.getTodayDate();
 	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"guestName\":\"" + guestName + "\", \"attend\":" + true + ", \"attendChurch\":" 
-		+ confirmChurch + ", \"attendOnlyChurch\":" + confirmOnlyChurch + ", \"plusOneName\":\"" + plusOneName + "\", \"accommodationPeriod\":\"" + accommodationPeriod 
-		+ "\", \"comment\":\"" + comment + "\", \"timestamp\":\"" + today + "\"}}";
+		+ confirmChurch + ", \"attendOnlyChurch\":" + confirmOnlyChurch + ", \"plusOneName\":\"" + plusOneName + "\", \"accommodationStartDate\":\"" + accommodationStart 
+		+ "\", \"accommodationEndDate\":\"" + accommodationEnd + "\", \"comment\":\"" + comment + "\", \"timestamp\":\"" + today + "\"}}";
 
 	Notification.sendNotification(postData);
 	Utils.hideConfirmationDialog();
