@@ -62,9 +62,8 @@ Notification.isConfirmationDataValid = function(language, attend) {
 	if (!attend) {
 		return true;
 	}
-
-	if (document.getElementById('confirmation-partner').style['display'] != "none"
-		&& document.getElementById('confirmation-partner').style['display'] != ""
+	
+	if (document.getElementById('confirmation-partner-checkbox').checked
 		&& document.getElementById('partner-name').value == "") {
 		switch (language) {
 			case 0:
@@ -80,8 +79,7 @@ Notification.isConfirmationDataValid = function(language, attend) {
 		return false;
 	}
 
-	if (document.getElementById('confirmation-accommodation-period').style['display'] != "none"
-		&& document.getElementById('confirmation-accommodation-period').style['display'] != ""
+	if (document.getElementById('confirmation-accommodation-checkbox').checked
 		&& document.getElementById('accommodation-start').value == ""
 		&& document.getElementById('accommodation-end').value == "") {
 		switch (language) {
@@ -115,16 +113,19 @@ Notification.sendNoConfirmationNotification = function(token) {
 Notification.sendConfirmationNotification = function(token) {
 	var guestId = Utils.getQueryVariable("guest");
 	var guestName = document.getElementById('guest-name').value;
-	var spouseName = document.getElementById('spouse-name').value;
-	var plusOneName = spouseName;
-	var partnerName = document.getElementById('partner-name').value;
-	if (spouseName == "") {
-		plusOneName = partnerName;
+	var plusOneName = "";
+	if (document.getElementById('confirmation-spouse').style.display == "block") {
+		plusOneName = document.getElementById('spouse-name').value;
+	} else if (document.getElementById('confirmation-partner-checkbox').checked) {
+		plusOneName = document.getElementById('partner-name').value;
 	}
-	var accommodationStart = document.getElementById('accommodation-start').value;
-	var accommodationEnd = document.getElementById('accommodation-end').value;
-	var confirmChurch = document.getElementById('confirm-church').checked;
-	var confirmOnlyChurch = document.getElementById('confirm-only-church').checked;
+	var accommodationStart = "", accommodationEnd = "";
+	if (document.getElementById('confirmation-accommodation-checkbox').checked) {
+	 	accommodationStart = document.getElementById('accommodation-start').value;
+		accommodationEnd = document.getElementById('accommodation-end').value;
+	}
+	var confirmChurch = document.getElementById('confirm-church-checkbox').checked;
+	var confirmOnlyChurch = document.getElementById('confirm-only-church-checkbox').checked;
 	var comment = document.getElementById('comment').value;
 
 	var today = Utils.getTodayDate();

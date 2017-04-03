@@ -30,26 +30,26 @@
 		  		Nume și prenume invitat: <input type="text" id="spouse-name"><br>
 		  	</label><br>
 
-			<div id="confirmation-partner-checkbox" class="hidden">
-				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-partner'), this)">Doriți să confirmați +1?<br>
+			<div id="confirmation-partner-div" class="hidden">
+				<input id="confirmation-partner-checkbox" type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-partner'), this)">Doriți să confirmați +1?<br>
 			  	<label id="confirmation-partner" class="hidden">
 			  		Nume și prenume: <input type="text" id="partner-name"><br>
 			  	</label><br>
 			</div>
 
-			<div id="confirmation-accommodation-checkbox" class="hidden">
-				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Aveți nevoie de cazare?<br>
+			<div id="confirmation-accommodation-div" class="hidden">
+				<input id="confirmation-accommodation-checkbox" type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Aveți nevoie de cazare?<br>
 			  	<div id="confirmation-accommodation-period" class="hidden">
 			  		Data sosirii: <input type="text" id="accommodation-start"><br>
 			  		Data plecării: <input type="text" id="accommodation-end"><br>
 			  	</div><br>
 		  	</div>
 
-			<input type="checkbox" id="confirm-church" value="off">Venim și la cununia religioasă.<br>
-			<input type="checkbox" id="confirm-only-church" value="off">Venim doar la cununia religioasă.<br><br>
+			<input type="checkbox" id="confirm-church-checkbox" value="off">Venim și la cununia religioasă.<br>
+			<input type="checkbox" id="confirm-only-church-checkbox" value="off">Venim doar la cununia religioasă.<br><br>
 
 			Mesaj pentru miri: <br />
-			<textarea rows="5" cols="50" id="comment">Vă rugăm lăsați aici un mesaj dacă aveți întrebări, nelămuriri sau doar vreți să salutați :)</textarea><br><br>
+			<textarea rows="5" cols="50" id="comment" onfocus="this.value='';">Vă rugăm lăsați aici un mesaj dacă aveți întrebări, nelămuriri sau doar vreți să salutați :)</textarea><br><br>
 
 		<button onclick="Notification.sendConfirmation(-1, true)" class="blue modal-confirmation-btn left">VIN</button><button onclick="Notification.sendConfirmation(-1, false)" class="blue modal-confirmation-btn right">NU VIN</button>
 	    </div>
@@ -1210,11 +1210,11 @@
 			document.getElementById('confirmation-spouse').style.display = "block";
 		} else {
 			// Show partner
-			document.getElementById('confirmation-partner-checkbox').style.display = "block";
+			document.getElementById('confirmation-partner-div').style.display = "block";
 		}
 
 		// Show accommodation
-		document.getElementById('confirmation-accommodation-checkbox').style.display = showAccommodation;
+		document.getElementById('confirmation-accommodation-div').style.display = showAccommodation;
 	};
   </script>
 </html>

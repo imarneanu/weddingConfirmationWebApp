@@ -22,7 +22,7 @@
 
 	<button id="confirmation-btn" class="blue">BITTE BESTÄTIGEN</button>
 	<div id="confirmation-dialog" class="modal">
-	  <div class="modal-content hidden">
+	  <div class="modal-content">
 	    <span class="close">&times;</span>
 	    <div id="confirmation-form">
 			Name und Familienname: <input type="text" id="guest-name"><br>
@@ -30,29 +30,28 @@
 		  		Name und Familienname: <input type="text" id="spouse-name"><br>
 		  	</label><br>
 
-			<div id="confirmation-partner-checkbox" class="hidden">
-				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-partner'), this)">Do you wish to confirm +1?<br>
+			<div id="confirmation-partner-div" class="hidden">
+				<input id="confirmation-partner-checkbox" type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-partner'), this)">Do you wish to confirm +1?<br>
 			  	<label id="confirmation-partner" class="hidden">
 			  		Name und Familienname: <input type="text" id="partner-name"><br>
 			  	</label><br>
 			</div>
 
-			<div id="confirmation-accommodation-checkbox">
-				<input type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Möchten sie übernachten?<br>
+			<div id="confirmation-accommodation-div">
+				<input id="confirmation-accommodation-checkbox" type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Möchten sie übernachten?<br>
 			  	<div id="confirmation-accommodation-period" class="hidden">
 			  		Ankunftsdatum: <input type="text" id="accommodation-start"><br>
 			  		Abreisedatum: <input type="text" id="accommodation-end"><br>
 			  	</div><br>
 		  	</div>
 
-			<input type="checkbox" id="confirm-church" value="off">Kommen auch zur Kirche.<br><br>
-			<input type="checkbox" id="confirm-only-church" value="off" class="hidden">Kommen nur zur Kirche.<br><br>
+			<input type="checkbox" id="confirm-church-checkbox" value="off">Kommen auch zur Kirche.<br><br>
+			<input type="checkbox" id="confirm-only-church-checkbox" value="off" class="hidden">Kommen nur zur Kirche.<br><br>
 
-			Nachricht für die Braut und Bräutigam: <br />
-			<textarea rows="5" cols="50" id="comment">Bitte hinterlassen Sie hier eine Nachricht, wenn Sie Fragen haben, Anliegen oder einfach nur 'Neața' :) sagen wollen
-			</textarea><br><br>
+			Nachricht für die Braut und Bräutigam: <br>
+			<textarea rows="5" cols="50" id="comment" onfocus="this.value='';">Bitte hinterlassen Sie hier eine Nachricht, wenn Sie Fragen haben, Anliegen oder einfach nur 'Neața' :) sagen wollen</textarea><br><br>
 
-			<button onclick="Notification.sendConfirmation(0, true)" class="blue modal-confirmation-btn left">ICH KOMME</button><button onclick="Notification.sendConfirmation(0, false)" class="blue modal-confirmation-btn right">LEIDER KOMME ICH NICHT</button>
+			<button onclick="Notification.sendConfirmation(-1, true)" class="blue modal-confirmation-btn left">ICH KOMME</button><button onclick="Notification.sendConfirmation(-1, false)" class="blue modal-confirmation-btn right">LEIDER KOMME ICH NICHT</button>
 	    </div>
 	  </div>
 	</div>
