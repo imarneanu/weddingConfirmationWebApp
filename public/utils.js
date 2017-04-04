@@ -68,15 +68,22 @@ Utils.getTodayDate = function () {
 	return dd + '.' + mm + '.' + yyyy + ' ' + hh + ':' + min;
 };
 
-Utils.setConfirmationDialog = function() {
+Utils.setConfirmationDialog = function(isDevDialog) {
 	var modal = document.getElementById('confirmation-dialog');
+	if (isDevDialog) {
+		modal = document.getElementById('dev-confirmation-dialog');
+	}
 
 	var btn = document.getElementById("confirmation-btn");
 	btn.onclick = function() {
 	    modal.style.display = "block";
 	}
 
-	var span = document.getElementsByClassName("close")[0];
+	var closeIndex = 0;
+	if (isDevDialog) {
+		closeIndex = 1;
+	}
+	var span = document.getElementsByClassName("close")[closeIndex];
 	span.onclick = function() {
 	    modal.style.display = "none";
 	}
@@ -88,8 +95,12 @@ Utils.setConfirmationDialog = function() {
 	}
 };
 
-Utils.hideConfirmationDialog = function() {
-	document.getElementById('confirmation-dialog').style.display = "none";
+Utils.hideConfirmationDialog = function(isDevDialog) {
+	var modal = document.getElementById('confirmation-dialog');
+	if (isDevDialog) {
+		modal = document.getElementById('dev-confirmation-dialog');
+	}
+	modal.style.display = "none";
 };
 
 Utils.showInput = function(input, checkbox) {
@@ -99,3 +110,9 @@ Utils.showInput = function(input, checkbox) {
 	}
 	input.style.display = "none";
 };
+
+Utils.toggleValue = function(value) {
+	if (value == 'false') 
+		return 'true'; 
+	return 'false';
+}

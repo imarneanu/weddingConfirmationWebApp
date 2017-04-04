@@ -141,5 +141,21 @@ button {
 }
 
 .hidden {
-    display: none; /* Hidden by default */
+    display: none;
+}
+
+input[type="text"] {
+  font-size: 15px;
+  width: 45%;  
+}
+
+.dev-input {
+  border: none;
+  border-color: transparent;
+  color: #008000;
+  width: 25%;  
+}
+.dev-input:focus {
+  outline-width: 0;
+  outline: none;
 }

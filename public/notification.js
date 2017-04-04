@@ -21,8 +21,8 @@ Notification.sendPageAccessedNotification = function(token, guestId) {
 	Notification.sendNotification(postData);
 };
 
-Notification.sendConfirmation = function(language, attend) {
-	if (!Notification.isConfirmationDataValid(language, attend)) {
+Notification.sendConfirmation = function(language, attend, devInput) {
+	if (!Notification.isConfirmationDataValid(language, attend, devInput)) {
 		return;
 	}
 
@@ -33,18 +33,26 @@ Notification.sendConfirmation = function(language, attend) {
 	request.onreadystatechange = function() {
 	    if (request.readyState == XMLHttpRequest.DONE) {
 	    	if (attend) {
+	    		if (devInput) {
+	    			Notification.sendDevConfirmationNotification(JSON.parse(request.responseText).token);
+	    			return;
+	    		}
   				Notification.sendConfirmationNotification(JSON.parse(request.responseText).token);
   				return;
   			}
-  			Notification.sendNoConfirmationNotification(JSON.parse(request.responseText).token);
+  			Notification.sendNoConfirmationNotification(JSON.parse(request.responseText).token, devInput);
 	    }
 	}
 	request.open(method, url, async);
 	request.send(null);
 };
 
-Notification.isConfirmationDataValid = function(language, attend) {
-	if (document.getElementById('guest-name').value == "") {
+Notification.isConfirmationDataValid = function(language, attend, devInput) {
+	var guestName = document.getElementById('guest-name').value;
+	if (devInput) {
+		guestName = document.getElementById('dev-guest-name').value;
+	}
+	if (guestName == "") {
 		switch (language) {
 			case 0:
 				alert("Please input your name!");
@@ -59,7 +67,7 @@ Notification.isConfirmationDataValid = function(language, attend) {
 		return false;
 	}
 
-	if (!attend) {
+	if (!attend || devInput) {
 		return true;
 	}
 	
@@ -99,9 +107,12 @@ Notification.isConfirmationDataValid = function(language, attend) {
 	return true;
 };
 
-Notification.sendNoConfirmationNotification = function(token) {
+Notification.sendNoConfirmationNotification = function(token, devInput) {
 	var guestId = Utils.getQueryVariable("guest");
 	var guestName = document.getElementById('guest-name').value;
+	if (devInput) {
+		guestName = document.getElementById('dev-guest-name').value;
+	}
 
 	var today = Utils.getTodayDate();
 	var postData = "{\"to\":\"" + token + "\",\"data\":{\"guest\":\"" + guestId + "\", \"guestName\":\"" + guestName + "\", \"attend\":" + false + ", \"timestamp\":\"" + today + "\"}}";
@@ -136,7 +147,28 @@ Notification.sendConfirmationNotification = function(token) {
 
 	Notification.saveConfirmation(guestData);
 	Notification.sendNotification(postData);
-	Utils.hideConfirmationDialog();
+	Utils.hideConfirmationDialog(false);
+};
+
+Notification.sendDevConfirmationNotification = function(token) {
+	var guestId = Utils.getQueryVariable("guest");
+	var guestName = document.getElementById('dev-guest-name').value;
+	var plusOneName = document.getElementById('dev-partner-name').value;
+	var accommodationStart = document.getElementById('dev-accommodation-start').value;
+	var accommodationEnd = document.getElementById('dev-accommodation-end').value;
+	var confirmChurch = document.getElementById('dev-confirm-church').value;
+	var confirmOnlyChurch = document.getElementById('dev-confirm-only-church').value;
+	var comment = document.getElementById('dev-comment').value;
+
+	var today = Utils.getTodayDate();
+	var guestData = "{\"guest\":\"" + guestId + "\", \"guestName\":\"" + guestName + "\", \"attend\":" + true + ", \"attendChurch\":" 
+		+ confirmChurch + ", \"attendOnlyChurch\":" + confirmOnlyChurch + ", \"plusOneName\":\"" + plusOneName + "\", \"accommodationStartDate\":\"" + accommodationStart 
+		+ "\", \"accommodationEndDate\":\"" + accommodationEnd + "\", \"comment\":\"" + comment + "\", \"timestamp\":\"" + today + "\"}";
+	var postData = "{\"to\":\"" + token + "\",\"data\":" + guestData + "}";
+
+	Notification.saveConfirmation(guestData);
+	Notification.sendNotification(postData);
+	Utils.hideConfirmationDialog(true);
 };
 
 Notification.sendNotification = function(postData) {

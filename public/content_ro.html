@@ -21,6 +21,7 @@
     </div>
 
 	<button id="confirmation-btn" class="blue">CONFIRMAȚI</button>
+
 	<div id="confirmation-dialog" class="modal">
 	  <div class="modal-content">
 	    <span class="close">&times;</span>
@@ -51,7 +52,28 @@
 			Mesaj pentru miri: <br />
 			<textarea rows="5" cols="50" id="comment" onfocus="this.value='';">Vă rugăm lăsați aici un mesaj dacă aveți întrebări, nelămuriri sau doar vreți să salutați :)</textarea><br><br>
 
-		<button onclick="Notification.sendConfirmation(-1, true)" class="blue modal-confirmation-btn left">VIN</button><button onclick="Notification.sendConfirmation(-1, false)" class="blue modal-confirmation-btn right">NU VIN</button>
+		<button onclick="Notification.sendConfirmation(-1, true, false)" class="blue modal-confirmation-btn left">VIN</button><button onclick="Notification.sendConfirmation(-1, false, false)" class="blue modal-confirmation-btn right">NU VIN</button>
+	    </div>
+	  </div>
+	</div>
+
+	<div id="dev-confirmation-dialog" class="modal">
+	  <div class="modal-content">
+	    <span class="close">&times;</span>
+	    <div>
+			Guest guest = <label style="color:#000080">new</label> Guest();<br>
+			guest.<label style="color:#660E7A">name</label> = <label style="color:#008000">"<input type="text" id="dev-guest-name" class="dev-input">"</label>;<br><br>
+			<label style="color:#000080">if</label> (guest.<label style="color:#660E7A">bringsPartner</label>) {<br>
+			&emsp;guest.<label style="color:#660E7A">partner</label> = <label style="color:#008000">"<input type="text" id="dev-partner-name" class="dev-input">"</label>;<br>
+			}<br>
+			<label style="color:#000080">if</label> (guest.<label style="color:#660E7A">needsAccommodation</label>) {<br>
+			&emsp;guest.<label style="color:#660E7A">arrivalDate</label> = <label style="color:#008000">"<input type="text" id="dev-accommodation-start" class="dev-input">"</label>;<br>
+			&emsp;guest.<label style="color:#660E7A">departureDate</label> = <label style="color:#008000">"<input type="text" id="dev-accommodation-end" class="dev-input">"</label>;<br>
+			}<br>
+			guest.<label style="color:#660E7A">attendAlsoChurch</label> = <input type="text" id="dev-confirm-church" value="false" style="color:#000080; width:9%" onclick="this.value = Utils.toggleValue(this.value)" readonly="true" class="dev-input">;<br>
+			guest.<label style="color:#660E7A">attendOnlyChurch</label> = <input type="text" id="dev-confirm-only-church" value="false" style="color:#000080; width:9%" onclick="this.value = Utils.toggleValue(this.value)" readonly="true" class="dev-input">;<br><br>
+			guest.<label style="color:#660E7A">comment</label> = <label style="color:#008000">"<textarea rows="3" cols="30" id="dev-comment" class="dev-input" style="color:#008000; width:60%" onfocus="this.value='';">Vă rugăm lăsați aici un mesaj dacă aveți întrebări, nelămuriri sau vreți doar să ziceți Neața! :)</textarea>"</label>;<br><br>
+			<button onclick="Notification.sendConfirmation(-1, true, true)" class="blue modal-confirmation-btn left">SEND CONFIRMATION</button><button onclick="Notification.sendConfirmation(-1, false, true)" class="blue modal-confirmation-btn right">SORRY, CAN'T COME</button>
 	    </div>
 	  </div>
 	</div>
@@ -60,12 +82,12 @@
   <script>
     window.onload = function() {
 		Utils.setRomanianTime();
-		Utils.setConfirmationDialog();
 
 	  	var guestId = Utils.getQueryVariable("guest");
 	  	var guestName;
 	  	var welcome = "Neața, ";
 
+	  	var showConfirmationDevDialog = false;
 	  	var showSpouse = false;
 	  	var showAccommodation;
 
@@ -81,15 +103,18 @@
 		  	welcome +=  "Dan și Dariana! :)";
 		  	guestName = "Dan Stoica"; 
 		  	showAccommodation = "block";
+		  	showConfirmationDevDialog = true;
 		  	break;
 	  	  // set 1
 		  case "adi.ispas":
 		  	welcome +=  "Adi! :)";
 		  	guestName = "Adi Ispas";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "corsau.rares":
 		  	welcome +=  "Rareș! :)";
 		  	guestName = "Rares Corsau";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "ioana.spiri":
 		  	welcome +=  "Ioana și Spiri! :)";
@@ -103,16 +128,19 @@
 		  case "rares.teodorescu":
 		  	welcome +=  "Rareș și Andreea! :)";
 		  	guestName = "Rares Teodorescu";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 2
 		  case "costi.nistor":
 		  	welcome =  "Bună, Costi! :)";
 		  	guestName = "Costi Nistor";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "dan.otilia":
 		  	welcome +=  "Dan și Otilia! :)";
 		  	guestName = "fam Regheni Dan si Otilia";
 		  	showSpouse = true;
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "mari":
 		  	welcome +=  "Mari! :)";
@@ -138,6 +166,7 @@
 		  case "adela.toderici":
 		  	welcome +=  "Adela! :)";
 		  	guestName = "Adela Toderici";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "banut":
 		  	welcome =  "Dragii noștri!";
@@ -152,6 +181,7 @@
 		  case "cici":
 		  	welcome +=  "Cici! :)";
 		  	guestName = "Cici Papoi";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "claudia.harangus":
 		  	welcome =  "Dragii noștri!";
@@ -167,6 +197,7 @@
 		  case "ervin.sarkozi":
 		  	welcome +=  "Sarkozi! :)";
 		  	guestName = "Ervin Sarkozi";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "fam.mone":
 		  	welcome =  "Dragii noștri!";
@@ -176,6 +207,7 @@
 		  case "gabi.imre":
 		  	welcome +=  "Gabi! :)";
 		  	guestName = "Gabi Imre";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "horia.muste":
 		  	welcome +=  "Horia! :)";
@@ -185,6 +217,7 @@
 		  	welcome +=  "Marius și Cristina! :)";
 		  	guestName = "fam Mailat Marius si Cristina";
 		  	showSpouse = true;
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "mihai.milian":
 		  	welcome +=  "Mihai și Dorina! :)";
@@ -206,6 +239,7 @@
 		  	welcome +=  "Romi și Tea! :)";
 		  	guestName = "fam Zdrite Romeo si Tea";
 		  	showSpouse = true;
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 2
 		  case "adela":
@@ -225,6 +259,7 @@
 		  case "stefan":
 		  	welcome +=  "Ștefan! :)";
 		  	guestName = "Stefan Endava";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 3
 		  case "anemona":
@@ -252,11 +287,13 @@
 		  case "adina.mandrut":
 		  	welcome +=  "Adina! :)";
 		  	guestName = "Adina Mandrut";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "balan.gabriela":
 		  	welcome +=  "doamna dirigintă! :)";
 		  	guestName = "fam Balan Gabriela";
 		  	showSpouse = true;
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "bruma":
 		  	welcome =  "Dragii noștri!";
@@ -277,14 +314,17 @@
 		  case "dani.hodrea":
 		  	welcome +=  "Dani!  :)";
 		  	guestName = "Dani Hodrea";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "ionut.branzei":
 		  	welcome +=  "Ionuț!  :)";
 		  	guestName = "Ionut Branzei";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "iza.birs":
 		  	welcome +=  "Iza!  :)";
 		  	guestName = "Iza Birs";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "madalin.milian":
 		  	welcome +=  "Mădă!  :)";
@@ -351,6 +391,7 @@
 		  case "sabau.andrei":
 		  	welcome +=  "Andrei!  :)";
 		  	guestName = "Sabau Andrei";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "silviu.sorel":
 		  	welcome +=  "Silviu!  :)";
@@ -360,10 +401,12 @@
 		  case "catalin.jurjiu":
 		  	welcome +=  "Cătă!  :)";
 		  	guestName = "Catalin Jurjiu";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "cipri":
 		  	welcome +=  "Cipri!  :)";
 		  	guestName = "Cipri Endava";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "monica.tomus":
 		  	welcome +=  "Moni!  :)";
@@ -378,12 +421,14 @@
 		  	welcome +=  "Ștefan!  :)";
 		  	guestName = "Stefan Raciu";
 		  	showAccommodation = "block";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // Litoral
 		  case "bogdan.trastes":
 		  	welcome +=  "Bogdan!  :)";
 		  	guestName = "Bogdan Trastes";
 		  	showAccommodation = "block";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "carmen.gabi":
 		  	welcome +=  "Carmen și Gabi!  :)";
@@ -395,6 +440,7 @@
 		  	welcome +=  "Zoe, Romi și Emi!  :)";
 		  	guestName = "Zoica Grecu";
 		  	showSpouse = true;
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 1
 		  case "angela.mari":
@@ -429,6 +475,7 @@
 		  case "marius.maricean":
 		  	welcome +=  "Marius!  :)";
 		  	guestName = "Marius Maricean";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "mioara.negoita":
 		  	welcome =  "Dragii noștri!";
@@ -455,6 +502,7 @@
 		  case "trisca.tudor":
 		  	welcome +=  "Trișcă!  :)";
 		  	guestName = "Tudor Trisca";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "uifalean.laura":
 		  	welcome +=  "Laura și Marius!  :)";
@@ -469,11 +517,13 @@
 		  case "vasile.todea":
 		  	welcome +=  "Vasile!  :)";
 		  	guestName = "Vasile Todea";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 2
 		  case "alex.graur":
 		  	welcome +=  "Alex!  :)";
 		  	guestName = "Alex Graur";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "alexandru.gama":
 		  	welcome =  "Bună, Alexandru!  :)";
@@ -483,6 +533,7 @@
 		  case "boga.mihai":
 		  	welcome +=  "Boga!  :)";
 		  	guestName = "Boga Mihai";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "lucian.livia":
 		  	welcome +=  "Lucian și Livia!  :)";
@@ -498,6 +549,7 @@
 		  case "darian.onaciu":
 		  	welcome +=  "Darian!  :)";
 		  	guestName = "Darian Onaciu";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "mircea.ponorean":
 		  	welcome +=  "Mircea!  :)";
@@ -520,6 +572,7 @@
 		  	welcome +=  "Alex și Mela!  :)";
 		  	guestName = "fam Moldovan Alex si Mela";
 		  	showSpouse = true;
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "costel":
 		  	welcome +=  "Costel!  :)";
@@ -538,6 +591,7 @@
 		  case "hosu.vlad":
 		  	welcome +=  "Vlad!  :)";
 		  	guestName = "Hosu Vlad";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "ionica.varga":
 		  	welcome =  "Dragii noștri!";
@@ -576,6 +630,7 @@
 		  case "eugen.vidolman":
 		  	welcome +=  "Eugen!  :)";
 		  	guestName = "Eugen Vidolman";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "oxana.dima":
 		  	welcome +=  "Oxana, Dima și Damian!  :)";
@@ -587,20 +642,24 @@
 		  case "cristi.david":
 		  	welcome +=  "Cristi!  :)";
 		  	guestName = "Cristi David";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "paul.szanto":
 		  	welcome +=  "Szanto!  :)";
 		  	guestName = "Szanto Paul";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // Ljublijana
 		  case "paul.boldijar":
 		  	welcome +=  "Paul!  :)";
 		  	guestName = "Paul Boldijar";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 2
 		  case "vitalie.valeria":
 		  	welcome +=  "Vitalie și Valeria!  :)";
 		  	guestName = "Vitalie Croitor";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // Ljubijana pod
 		  case "daniela.harau":
@@ -637,6 +696,7 @@
 		  case "laurentiu.ungur":
 		  	welcome +=  "Laurențiu!  :)";
 		  	guestName = "Laurentiu Ungur";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "loici":
 		  	welcome =  "Dragii noștri!";
@@ -666,6 +726,7 @@
 		  case "paul.becan":
 		  	welcome +=  "Paul și Carmen!  :)";
 		  	guestName = "fam Becan Paul si Carmen";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  case "petrica.iorga":
@@ -705,6 +766,7 @@
 		  case "ruxi.moldovan":
 		  	welcome +=  "Ruxi!  :)";
 		  	guestName = "Ruxi Moldovan";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 3
 		  case "ecaterina":
@@ -721,6 +783,7 @@
 		  case "rares.tomos":
 		  	welcome +=  "Rareș!  :)";
 		  	guestName = "fam Tomos Rares";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  // Londra
@@ -731,6 +794,7 @@
 		  case "cami.razvan":
 		  	welcome +=  "Cami și Răzvan!  :)";
 		  	guestName = "fam Musca Razvan si Cami";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  case "denisa.dobrescu":
@@ -751,6 +815,7 @@
 		  case "dragos.natea":
 		  	welcome +=  "Dragoș!  :)";
 		  	guestName = "Dragos Natea";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "florin.petrutiu":
 		  	welcome =  "Dragii noștri!";
@@ -780,6 +845,7 @@
 		  case "marian.hodis":
 		  	welcome +=  "Marian și Ludmila!  :)";
 		  	guestName = "fam Hodis Marian si Ludmila";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  case "matusa.marna":
@@ -795,6 +861,7 @@
 		  case "plesa.mihai":
 		  	welcome +=  "Mihai!  :)";
 		  	guestName = "Plesa Mihai";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "udvarhely.arpad":
 		  	welcome =  "Dragii noștri!";
@@ -804,6 +871,7 @@
 		  case "vlad.precup":
 		  	welcome +=  "Vlad!  :)";
 		  	guestName = "Vlad Precup";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 2
 		  case "eugen.zinkovschi":
@@ -814,11 +882,13 @@
 		  case "fam.valean":
 		  	welcome +=  "Ale și Cristi!  :)";
 		  	guestName = "fam Valean Cristi si Ale";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  case "hasna.octavian":
 		  	welcome +=  "Octavian!  :)";
 		  	guestName = "Octavian Hasna";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "ion.urecheanu":
 		  	welcome =  "Dragii noștri!";
@@ -842,10 +912,12 @@
 		  case "itu.virgil":
 		  	welcome +=  "Itu!  :)";
 		  	guestName = "Virgil Itu";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "iulia.iancu":
 		  	welcome +=  "Iulia și Cipri!  :)";
 		  	guestName = "Iulia Iancu";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // Los Barrios
 		  case "maria.valera":
@@ -858,16 +930,19 @@
 		  case "feri":
 		  	welcome +=  "Feri!  :)";
 		  	guestName = "Ferenc Laszloffy";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 2
 		  case "eugen.andreea":
 		  	welcome +=  "Eugen și Andreea!  :)";
 		  	guestName = "fam Regheni Eugen si Andreea";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  case "nicolae.ghimbovschi":
 		  	welcome +=  "Nicu!  :)";
 		  	guestName = "Nicolae Ghimbovschi";
+		  	showConfirmationDevDialog = true;
 		  	showAccommodation = "block";
 		  	break;
 		  case "tommy":
@@ -885,10 +960,12 @@
 		  	welcome +=  "Alin!  :)";
 		  	guestName = "Alin Craciun";
 		  	showAccommodation = "block";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "imy.bernhard":
 		  	welcome +=  "Imy și Bernhard!  :)";
 		  	guestName = "Timea Turdean";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 1
 		  case "bizo.maria":
@@ -898,6 +975,7 @@
 		  case "bogdan.oanes":
 		  	welcome +=  "Bogdan și Cristina!  :)";
 		  	guestName = "Bogdan Oanes";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "damaris":
 		  	welcome +=  "Damaris!  :)";
@@ -944,6 +1022,7 @@
 		  case "vlad.tamas":
 		  	welcome +=  "Vlad și Teo!  :)";
 		  	guestName = "Vlad Tamas";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 2
 		  case "dorina.maxim":
@@ -969,6 +1048,7 @@
 		  case "raluca.fenesan":
 		  	welcome +=  "Raluca!  :)";
 		  	guestName = "Raluca Fenesan";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "sandor.kiss":
 		  	welcome +=  "Șandor și Ersilia!  :)";
@@ -978,6 +1058,7 @@
 		  case "stanean.tudor":
 		  	welcome +=  "Tudor și Denisa!  :)";
 		  	guestName = "Stanean Tudor";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 3
 		  case "elena":
@@ -987,6 +1068,7 @@
 		  case "razvan.rosa":
 		  	welcome +=  "Roșa!  :)";
 		  	guestName = "Rosa Razvan";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // Venetia
 		  case "cristiana.pasca":
@@ -1007,7 +1089,8 @@
 		  // set 1
 		  case "dragos.dobrean":
 		  	welcome +=  "Dragoș!  :)";
-		  	guestName = "Dragos Dobreab";
+		  	guestName = "Dragos Dobrean";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "gabi.soci":
 		  	welcome =  "Dragii noștri!";
@@ -1027,26 +1110,31 @@
 		  case "mihai.timar":
 		  	welcome +=  "Mihai!  :)";
 		  	guestName = "Mihai Timar";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "raluca.claudiu":
 		  	welcome +=  "Raluca și Claudiu!  :)";
 		  	guestName = "fam Alban Claudiu si Raluca";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  case "razvan.nicoara":
 		  	welcome +=  "Neagu!  :)";
 		  	guestName = "Razvan Nicoara";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // set 2
 		  case "ghena.irina":
 		  	welcome +=  "Ghena și Irina!  :)";
 		  	guestName = "fam Ghena si Irina";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	showAccommodation = "block";
 		  	break;
 		  case "nastasa.bogdan":
 		  	welcome +=  "Bogdan și Cristina!  :)";
 		  	guestName = "fam Nastasa Bogdan si Cristina";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  // Venetia 2
@@ -1059,6 +1147,7 @@
 		  case "adi.militaru":
 		  	welcome +=  "Adi și Georgiana!  :)";
 		  	guestName = "fam Militaru Adi si Georgiana";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  case "adina.timar":
@@ -1072,6 +1161,7 @@
 		  case "bogdan.nourescu":
 		  	welcome +=  "Bogdan și Raluca!  :)";
 		  	guestName = "Bogdan Nourescu";
+		  	showConfirmationDevDialog = true;
 		  	showAccommodation = "block";
 		  	break;
 		  // set 2
@@ -1089,6 +1179,7 @@
 		  case "lili":
 		  	welcome +=  "Timea!  :)";
 		  	guestName = "Timea Varga";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  // Vidraru
 		  case "bodea.valentin":
@@ -1126,6 +1217,7 @@
 		  case "boca.bogdan":
 		  	welcome +=  "Boca!  :)";
 		  	guestName = "Bogdan Boca";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "cretu.alexandru":
 		  	welcome +=  "Alex și Roxi! :)";
@@ -1160,17 +1252,20 @@
 		  case "magda.alin":
 		  	welcome +=  "Magda și Alin! :)";
 		  	guestName = "fam Miu Alin si Magda";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	showAccommodation = "block";
 		  	break;
 		  case "vlad.ardelean":
 		  	welcome +=  "Țu și Iza! :)";
 		  	guestName = "fam Ardelean Vlad si Iza";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  case "ziggy.frumosul":
 		  	welcome +=  "Ziggy!  :)";
 		  	guestName = "fam Pop Laurentiu";
+		  	showConfirmationDevDialog = true;
 		  	showSpouse = true;
 		  	break;
 		  // set 2
@@ -1181,11 +1276,13 @@
 		  case "denis.iulia":
 		  	welcome +=  "Denis și Iulia!  :)";
 		  	guestName = "Denis Palii";
+		  	showConfirmationDevDialog = true;
 		  	showAccommodation = "block";
 		  	break;
 		  case "dragos.roxi":
 		  	welcome +=  "Dragoș și Roxi!  :)";
 		  	guestName = "Dragos Filipovici";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  case "florin.antusa":
 		  	welcome +=  "Florin și Antusa!  :)";
@@ -1196,6 +1293,7 @@
 		  case "razvan.candale":
 		  	welcome +=  "Răzvan!  :)";
 		  	guestName = "Razvan Candale";
+		  	showConfirmationDevDialog = true;
 		  	break;
 		  default:
 		  	welcome =  "Dragii noștri!";
@@ -1204,6 +1302,7 @@
 	  	}
 	    document.getElementById('welcome-message').innerHTML = welcome;
 		Notification.sendPageAccessed(guestId);
+		Utils.setConfirmationDialog(showConfirmationDevDialog);
 
 		if (showSpouse) {
 			// Show spouse
@@ -1215,6 +1314,6 @@
 
 		// Show accommodation
 		document.getElementById('confirmation-accommodation-div').style.display = showAccommodation;
-	};
-  </script>
+		};
+	</script>
 </html>
