@@ -149,7 +149,7 @@ input[type="text"] {
   width: 45%;  
 }
 
-.dev-input {
+.dev-input{
   border: none;
   border-color: transparent;
   color: #008000;
@@ -158,4 +158,12 @@ input[type="text"] {
 .dev-input:focus {
   outline-width: 0;
   outline: none;
+}
+
+#dev-comment {
+  border: none;
+  border-color: transparent;
+  font-size: 15px;
+  color:#008000; 
+  width:60%;
 }

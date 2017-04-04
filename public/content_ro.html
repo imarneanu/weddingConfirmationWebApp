@@ -64,7 +64,7 @@
 			Guest guest = <label style="color:#000080">new</label> Guest();<br>
 			guest.<label style="color:#660E7A">name</label> = <label style="color:#008000">"<input type="text" id="dev-guest-name" class="dev-input">"</label>;<br><br>
 			<label style="color:#000080">if</label> (guest.<label style="color:#660E7A">bringsPartner</label>) {<br>
-			&emsp;guest.<label style="color:#660E7A">partner</label> = <label style="color:#008000">"<input type="text" id="dev-partner-name" class="dev-input">"</label>;<br>
+			&emsp;guest.<label style="color:#660E7A">partnerName</label> = <label style="color:#008000">"<input type="text" id="dev-partner-name" class="dev-input">"</label>;<br>
 			}<br>
 			<label style="color:#000080">if</label> (guest.<label style="color:#660E7A">needsAccommodation</label>) {<br>
 			&emsp;guest.<label style="color:#660E7A">arrivalDate</label> = <label style="color:#008000">"<input type="text" id="dev-accommodation-start" class="dev-input">"</label>;<br>
@@ -72,7 +72,7 @@
 			}<br>
 			guest.<label style="color:#660E7A">attendAlsoChurch</label> = <input type="text" id="dev-confirm-church" value="false" style="color:#000080; width:9%" onclick="this.value = Utils.toggleValue(this.value)" readonly="true" class="dev-input">;<br>
 			guest.<label style="color:#660E7A">attendOnlyChurch</label> = <input type="text" id="dev-confirm-only-church" value="false" style="color:#000080; width:9%" onclick="this.value = Utils.toggleValue(this.value)" readonly="true" class="dev-input">;<br><br>
-			guest.<label style="color:#660E7A">comment</label> = <label style="color:#008000">"<textarea rows="3" cols="30" id="dev-comment" class="dev-input" style="color:#008000; width:60%" onfocus="this.value='';">Vă rugăm lăsați aici un mesaj dacă aveți întrebări, nelămuriri sau vreți doar să ziceți Neața! :)</textarea>"</label>;<br><br>
+			guest.<label style="color:#660E7A">comment</label> = <label style="color:#008000">"<textarea rows="3" cols="30" id="dev-comment" style="color:#008000; width:60%" onfocus="this.value='';">Vă rugăm lăsați aici un mesaj dacă aveți întrebări, nelămuriri sau vreți doar să ziceți Neața! :)</textarea>"</label>;<br><br>
 			<button onclick="Notification.sendConfirmation(-1, true, true)" class="blue modal-confirmation-btn left">SEND CONFIRMATION</button><button onclick="Notification.sendConfirmation(-1, false, true)" class="blue modal-confirmation-btn right">SORRY, CAN'T COME</button>
 	    </div>
 	  </div>
