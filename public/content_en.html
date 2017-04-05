@@ -25,9 +25,9 @@
 	  <div class="modal-content">
 	    <span class="close">&times;</span>
 	    <div id="confirmation-form">
-			Guest name and family name: <input type="text" id="guest-name"><br>
+			Name and family name: <input type="text" id="guest-name"><br>
 		  	<label id="confirmation-spouse" class="hidden">
-		  		Guest name and family name: <input type="text" id="spouse-name"><br>
+		  		Name and family name: <input type="text" id="spouse-name"><br>
 		  	</label><br>
 
 			<div id="confirmation-partner-div" class="hidden">
@@ -40,8 +40,8 @@
 			<div id="confirmation-accommodation-div">
 				<input id="confirmation-accommodation-checkbox" type="checkbox" onclick="Utils.showInput(document.getElementById('confirmation-accommodation-period'), this)">Do you need accommodation?<br>
 			  	<div id="confirmation-accommodation-period" class="hidden">
-			  		Arrival date: <input type="text" id="accommodation-start"><br>
-			  		Departure date: <input type="text" id="accommodation-end"><br>
+			  		Arrival date:&emsp;&emsp;<input type="text" id="accommodation-start"><br>
+			  		Departure date:<input type="text" id="accommodation-end"><br>
 			  	</div><br>
 		  	</div>
 
@@ -51,7 +51,7 @@
 			</div>
 
 			Message for the bride and groom: <br />
-			<textarea rows="5" cols="50" id="comment" onfocus="this.value='';">Please leave here a message if you have any questions, concerns or just want to say 'Neața' :)</textarea><br><br>
+			<textarea rows="5" cols="45" id="comment" onfocus="this.value='';">Please leave here a message if you have any questions, concerns or just want to say 'Neața' :)</textarea><br><br>
 
 			<button onclick="Notification.sendConfirmation(0, true)" class="blue modal-confirmation-btn left">I'M SO THERE</button><button onclick="Notification.sendConfirmation(0, false)" class="blue modal-confirmation-btn right">CAN'T COME</button>
 	    </div>
