@@ -35,7 +35,14 @@ body {
   font-weight: 300;
   line-height: 150%;
   text-align: center;
-} 
+}
+
+#main-content .schedule {
+  font-size: 20px;
+  color: #000f55;
+  font-weight: 300;
+  text-align: center;
+}
 
 #message h1 {
   margin-top: 100px;

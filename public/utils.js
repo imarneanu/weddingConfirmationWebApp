@@ -119,4 +119,24 @@ Utils.toggleValue = function(value) {
 	if (value == 'false') 
 		return 'true'; 
 	return 'false';
+};
+
+Utils.setElementColor = function(hour) {
+	var elementId = "program" + (hour + 1);
+	document.getElementById(elementId).style.color = "magenta";
+};
+
+Utils.resetColors = function() {
+	document.getElementById("program1").style.color = "#000f55";
+	document.getElementById("program2").style.color = "#000f55";
+	document.getElementById("program3").style.color = "#000f55";
+	document.getElementById("program4").style.color = "#000f55";
+	document.getElementById("program5").style.color = "#000f55";
+	document.getElementById("program6").style.color = "#000f55";
+	document.getElementById("program7").style.color = "#000f55";
+	document.getElementById("program8").style.color = "#000f55";
+	document.getElementById("program9").style.color = "#000f55";
+	document.getElementById("program10").style.color = "#000f55";
+	document.getElementById("program11").style.color = "#000f55";
+	document.getElementById("program12").style.color = "#000f55";
 }
