@@ -39,8 +39,11 @@
 		  default:
 		    content = "content_ro.html";
 	  	}
-	  	if (content != null) {
-		  	window.location = "https://iuliaalexwedding.firebaseapp.com/" + content + "?guest=" + guestId;
+	  	var hour = Utils.getSchedule();
+	  	if (hour < 0) {
+	  		window.location = "https://iuliaalexwedding.firebaseapp.com/" + content + "?guest=" + guestId;
+	  	} else {
+	  		window.location = "https://iuliaalexwedding.firebaseapp.com/schedule.html";
 	  	}
 	};
   </script>

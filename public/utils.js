@@ -41,6 +41,10 @@ Utils.setGermanTime = function() {
 	);
 };
 
+Utils.getSchedule = function() {
+    return Math.floor((new Date() - new Date('2017-04-29T05:30:00Z'))/1000/60/60);
+};
+
 Utils.getTodayDate = function () {
 	var today = new Date();
 	var hh = today.getHours();
